@@ -23,6 +23,7 @@
     in
     {
       packages = {
+        claude-code-ide = pkgs.emacsPackages.callPackage ./pkgs/claude-code-ide { };
         docx = pkgs.callPackage ./pkgs/docx { };
         ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
         pi-acp = pkgs.callPackage ./pkgs/pi-acp { };

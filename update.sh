@@ -6,6 +6,7 @@ ROOT="$(cd -- "$(dirname -- "$0")" && pwd)"
 SYSTEM="${SYSTEM:-$(nix eval --raw --impure --expr builtins.currentSystem)}"
 
 PACKAGES=(
+  claude-code-ide
   docx
   ghostel
   pi-acp
@@ -27,6 +28,7 @@ nix eval "$ROOT#packages.${SYSTEM}" --apply builtins.attrNames
 
 printf '\n==> Verifying dry-run builds on %s\n' "$SYSTEM"
 nix build --dry-run \
+  "$ROOT#packages.${SYSTEM}.claude-code-ide" \
   "$ROOT#packages.${SYSTEM}.docx" \
   "$ROOT#packages.${SYSTEM}.ghostel" \
   "$ROOT#packages.${SYSTEM}.pi-acp" \
