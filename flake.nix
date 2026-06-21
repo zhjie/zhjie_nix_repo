@@ -7,7 +7,11 @@
   };
 
   outputs =
-    { self, nixpkgs, flake-utils }:
+    {
+      self,
+      nixpkgs,
+      flake-utils,
+    }:
     flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = import nixpkgs {
@@ -20,6 +24,7 @@
     {
       packages = {
         docx = pkgs.callPackage ./pkgs/docx { };
+        ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
         pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
         pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
       } // (if system == "x86_64-linux" then {
