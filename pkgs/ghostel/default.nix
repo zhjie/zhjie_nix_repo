@@ -48,12 +48,12 @@ let
     postConfigure = ''
       cp -rLT ${finalAttrs.deps} "$ZIG_GLOBAL_CACHE_DIR/p"
       chmod -R u+w "$ZIG_GLOBAL_CACHE_DIR/p"
+    ''
+    + lib.optionalString stdenv.hostPlatform.isDarwin ''
+      substituteInPlace build.zig \
+        --replace-fail '.macos => "../ghostel-module.dylib",' \
+                       '.macos => "lib/ghostel-module.dylib",'
     '';
-    # + lib.optionalString stdenv.hostPlatform.isDarwin ''
-    #   substituteInPlace build.zig \
-    #     --replace-fail '.macos => "../ghostel-module.dylib",' \
-    #                    '.macos => "lib/ghostel-module.dylib",'
-    # '';
   });
 
   libExt = stdenv.hostPlatform.extensions.sharedLibrary;
