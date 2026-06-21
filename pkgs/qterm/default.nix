@@ -5,13 +5,16 @@
   qt6,
   stdenv,
 }:
+let
+  hashes = lib.importJSON ./hashes.json;
+in
 stdenv.mkDerivation (finalAttrs: {
   pname = "qterm";
-  version = "0.8.2";
+  version = hashes.version;
 
   src = fetchurl {
     url = "https://github.com/qterm/qterm/archive/refs/tags/${finalAttrs.version}.tar.gz";
-    hash = "sha256-KuikJbL8Y8GRIpn5oacQ+Bpm0CuOlLHuVKaFHTlTxvI=";
+    hash = hashes.sourceHash;
   };
 
   nativeBuildInputs = [

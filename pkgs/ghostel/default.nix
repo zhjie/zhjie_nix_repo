@@ -4,20 +4,20 @@
   melpaBuild,
   nix-update-script,
   stdenv,
-  zig_0_15,
+  zig,
   emacs,
 }:
 
 let
-  zig = zig_0_15;
+  hashes = lib.importJSON ./hashes.json;
   pname = "ghostel";
-  version = "0.34.0-unstable-2026-06-08";
+  version = hashes.version;
 
   src = fetchFromGitHub {
     owner = "dakra";
     repo = "ghostel";
-    rev = "f7800f6430b6ab85dbfc2db2129625e8a28ac17e";
-    hash = "sha256-o9EQFA6xunwt/chdA5z8bqadr9V3COBPjRqiAY3jkp0=";
+    rev = hashes.rev;
+    hash = hashes.sourceHash;
   };
 
   module = stdenv.mkDerivation (finalAttrs: {
@@ -26,7 +26,7 @@ let
     deps = zig.fetchDeps {
       inherit (finalAttrs) src pname version;
       fetchAll = true;
-      hash = "sha256-CTsG3dXu3DECDbklBAtr2fYou82WNvQ1Q3JET0TmuyM=";
+      hash = hashes.zigDepsHash;
     };
 
     nativeBuildInputs = [ zig ];
@@ -82,7 +82,7 @@ melpaBuild {
   meta = {
     homepage = "https://github.com/dakra/ghostel";
     description = "Terminal emulator powered by libghostty";
-    maintainers = with lib.maintainers; [ vonfry ];
     license = lib.licenses.gpl3Plus;
+    changelog = "https://github.com/dakra/ghostel/releases/tag/v${version}";
   };
 }
