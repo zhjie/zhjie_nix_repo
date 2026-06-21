@@ -4,12 +4,13 @@
   melpaBuild,
   nix-update-script,
   stdenv,
-  zig,
+  zig_0_15,
   emacs,
 }:
 
 let
   hashes = lib.importJSON ./hashes.json;
+  zig = zig_0_15;
   pname = "ghostel";
   version = hashes.version;
 
@@ -47,18 +48,12 @@ let
     postConfigure = ''
       cp -rLT ${finalAttrs.deps} "$ZIG_GLOBAL_CACHE_DIR/p"
       chmod -R u+w "$ZIG_GLOBAL_CACHE_DIR/p"
-
-      substituteInPlace "$ZIG_GLOBAL_CACHE_DIR"/p/ghostty-*/build.zig \
-        --replace-fail '    const bench = try buildpkg.GhosttyBench.init(b, &deps);' '    if (config.emit_bench) {
-        const bench = try buildpkg.GhosttyBench.init(b, &deps);' \
-        --replace-fail '    if (config.emit_bench) bench.install();' '        bench.install();
-    }'
-    ''
-    + lib.optionalString stdenv.hostPlatform.isDarwin ''
-      substituteInPlace build.zig \
-        --replace-fail '.macos => "../ghostel-module.dylib",' \
-                       '.macos => "lib/ghostel-module.dylib",'
     '';
+    # + lib.optionalString stdenv.hostPlatform.isDarwin ''
+    #   substituteInPlace build.zig \
+    #     --replace-fail '.macos => "../ghostel-module.dylib",' \
+    #                    '.macos => "lib/ghostel-module.dylib",'
+    # '';
   });
 
   libExt = stdenv.hostPlatform.extensions.sharedLibrary;
