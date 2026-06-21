@@ -27,14 +27,9 @@ else
   LATEST="${TAG_LINE##*$'\t'}"
 fi
 
+SYSTEM="${SYSTEM:-$(nix eval --raw --impure --expr builtins.currentSystem)}"
 CURRENT="$(jq -r '.version' "$HASHES_FILE" 2>/dev/null || echo "0.0.0")"
 printf 'Current: %s  Latest: %s\n' "$CURRENT" "$LATEST"
-
-if [ "$CURRENT" = "$LATEST" ] \
-  && jq -e '.rev and .sourceHash and .zigDepsHash' "$HASHES_FILE" >/dev/null 2>&1; then
-  printf 'Already up to date.\n'
-  exit 0
-fi
 
 SOURCE_URL="https://github.com/dakra/ghostel/archive/refs/tags/v${LATEST}.tar.gz"
 
@@ -55,7 +50,6 @@ jq -n \
   '{ version: $version, rev: $rev, sourceHash: $sourceHash, zigDepsHash: $zigDepsHash }' \
   > "$HASHES_FILE"
 
-SYSTEM="${SYSTEM:-$(nix eval --raw --impure --expr builtins.currentSystem)}"
 set +e
 BUILD_OUTPUT="$(nix build "$REPO_ROOT#packages.${SYSTEM}.ghostel.module" --no-link 2>&1)"
 BUILD_STATUS=$?
@@ -83,4 +77,6 @@ jq -n \
   '{ version: $version, rev: $rev, sourceHash: $sourceHash, zigDepsHash: $zigDepsHash }' \
   > "$HASHES_FILE"
 
+printf 'Verifying updated ghostel build...\n'
+nix build "$REPO_ROOT#packages.${SYSTEM}.ghostel.module" --no-link
 printf 'Updated ghostel to %s\n' "$LATEST"

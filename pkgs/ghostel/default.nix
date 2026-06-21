@@ -49,19 +49,11 @@ let
       cp -rLT ${finalAttrs.deps} "$ZIG_GLOBAL_CACHE_DIR/p"
       chmod -R u+w "$ZIG_GLOBAL_CACHE_DIR/p"
 
-      for ghostty_archive in "$ZIG_GLOBAL_CACHE_DIR"/p/ghostty-*.tar.gz; do
-        ghostty_dir="''${ghostty_archive%.tar.gz}"
-        rm -rf "$ghostty_dir"
-        mkdir -p "$ghostty_dir"
-        tar -xzf "$ghostty_archive" -C "$ghostty_dir" --strip-components=1
-        chmod -R u+w "$ghostty_dir"
-
-        substituteInPlace "$ghostty_dir/build.zig" \
-          --replace-fail '    const bench = try buildpkg.GhosttyBench.init(b, &deps);' '    if (config.emit_bench) {
+      substituteInPlace "$ZIG_GLOBAL_CACHE_DIR"/p/ghostty-*/build.zig \
+        --replace-fail '    const bench = try buildpkg.GhosttyBench.init(b, &deps);' '    if (config.emit_bench) {
           const bench = try buildpkg.GhosttyBench.init(b, &deps);' \
-          --replace-fail '    if (config.emit_bench) bench.install();' '        bench.install();
+        --replace-fail '    if (config.emit_bench) bench.install();' '        bench.install();
       }'
-      done
     ''
     + lib.optionalString stdenv.hostPlatform.isDarwin ''
       substituteInPlace build.zig \
