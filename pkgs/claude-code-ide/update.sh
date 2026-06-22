@@ -32,7 +32,7 @@ CURRENT_REV="$(jq -r '.rev' "$HASHES_FILE" 2>/dev/null || echo "")"
 CURRENT_VERSION="$(jq -r '.version' "$HASHES_FILE" 2>/dev/null || echo "")"
 printf 'Current: %s (%s)  Latest: %s (%s)\n' "$CURRENT_VERSION" "$CURRENT_REV" "$VERSION" "$REV"
 
-if [ "$CURRENT_REV" = "$REV" ] && jq -e '.version and .sourceHash' "$HASHES_FILE" >/dev/null 2>&1; then
+if [ "$CURRENT_REV" = "$REV" ] && jq -e '(.version | length > 0) and (.sourceHash | length > 0)' "$HASHES_FILE" >/dev/null 2>&1; then
   printf 'Already up to date.\n'
   exit 0
 fi
