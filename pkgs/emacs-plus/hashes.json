@@ -9,8 +9,8 @@
       "hash": "sha256-Nwas6hazk+FrK0adxjk6rY99J4qGIc05JMzm8IlUbp4="
     },
     "fix-window-role": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-window-role.patch",
-      "hash": "sha256-Rq5Z4CuEUBc7R9nNtzJ/DAdJ/ETyHq71QqVPr2zEACc="
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/fix-window-role.patch",
+      "hash": "sha256-H4Qj6n5uZsmsbdjjexGZctqhJk3gAXKiSnmnEO/LgTA="
     },
     "system-appearance": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch",

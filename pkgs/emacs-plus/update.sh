@@ -22,13 +22,25 @@ PATCHES=(
 get_patch_url() {
   local name="$1"
   local ver="$2"
+  local url
   # Community patches are under community/patches/<name>/emacs-<ver>.patch
   if [ "$name" = "mac-font-use-typo-metrics" ] || [ "$name" = "aggressive-read-buffering" ]; then
-    echo "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/${name}/emacs-${ver}.patch"
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/${name}/emacs-${ver}.patch"
   else
     # Built-in patches are under patches/emacs-<ver>/<name>.patch
-    echo "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-${ver}/${name}.patch"
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-${ver}/${name}.patch"
   fi
+
+  # Resolve Git symlink if the target is a relative path (e.g. starting with ../)
+  local content
+  content=$(curl -sL --max-filesize 1000 "$url" || true)
+  if [[ "$content" =~ ^\.\./ ]]; then
+    # e.g., if content is ../emacs-28/fix-window-role.patch
+    # strip the leading "../" and prepend the base repo patches path
+    local rel_path=${content#../}
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/${rel_path}"
+  fi
+  echo "$url"
 }
 
 # Fetch patches
