@@ -22,6 +22,11 @@ stdenv.mkDerivation {
         tell application "Emacs" to activate
       end open
 
+      on run
+        do shell script "/run/current-system/sw/bin/emacsclient -c -n -a \"\""
+        tell application "Emacs" to activate
+      end run
+
       on open location the_url
         do shell script "/run/current-system/sw/bin/emacsclient -n -a \"\" " & quoted form of the_url
         tell application "Emacs" to activate
@@ -34,8 +39,11 @@ stdenv.mkDerivation {
     /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes list" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
     /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string org-protocol" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
 
-    echo "Copying custom dragon icon from emacs-plus..."
+    echo "Copying custom dragon icons and Assets.car from emacs-plus..."
     cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$out/Applications/Emacs Client.app/Contents/Resources/applet.icns"
+    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$out/Applications/Emacs Client.app/Contents/Resources/droplet.icns"
+    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Assets.car" "$out/Applications/Emacs Client.app/Contents/Resources/Assets.car"
+    rm -f "$out/Applications/Emacs Client.app/Contents/Resources/droplet.rsrc"
   '';
 
   meta = {
