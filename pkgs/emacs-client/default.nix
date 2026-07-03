@@ -12,38 +12,102 @@ stdenv.mkDerivation {
 
   installPhase = ''
     mkdir -p $out/Applications
-    
+    clientApp="$out/Applications/Emacs Client.app"
+    clientPlist="$clientApp/Contents/Info.plist"
+    clientResources="$clientApp/Contents/Resources"
+    clientScript="$PWD/emacs-client.applescript"
+    clientPath="/run/current-system/sw/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+    emacs="${emacs-plus}/Applications/Emacs.app/Contents/MacOS/Emacs"
+    emacsclient="${emacs-plus}/bin/emacsclient"
+
+    plist_set() {
+      key="$1"
+      type="$2"
+      value="$3"
+      /usr/libexec/PlistBuddy -c "Add :$key $type $value" "$clientPlist" 2>/dev/null \
+        || /usr/libexec/PlistBuddy -c "Set :$key $value" "$clientPlist"
+    }
+
     echo "Compiling Emacs Client.app using osacompile..."
-    /usr/bin/osacompile -o "$out/Applications/Emacs Client.app" -e '
+    cat > "$clientScript" <<EOF
+      -- Emacs Client AppleScript Application
+      -- Handles opening files from Finder, drag-and-drop, and launching from Spotlight/Dock
+
+      on runClient(clientArgs)
+        try
+          do shell script "PATH='$clientPath' '$emacsclient' " & clientArgs
+        on error
+          do shell script "'$emacs' --daemon"
+          do shell script "PATH='$clientPath' '$emacsclient' " & clientArgs
+        end try
+      end runClient
+
+      on activateEmacsIfRunning()
+        if application "Emacs" is running then
+          tell application "Emacs" to activate
+        end if
+      end activateEmacsIfRunning
+
       on open the_files
         repeat with the_file in the_files
-          do shell script "/run/current-system/sw/bin/emacsclient -c -n -a \"\" " & quoted form of (POSIX path of the_file)
+          set dropPath to quoted form of (POSIX path of the_file)
+          my runClient("-c -n " & dropPath)
         end repeat
-        tell application "Emacs" to activate
+        my activateEmacsIfRunning()
       end open
 
+      -- Handle launch without files (from Spotlight, Dock, or Finder)
       on run
-        do shell script "/run/current-system/sw/bin/emacsclient -c -n -a \"\""
-        tell application "Emacs" to activate
+        my runClient("-c -n")
+        my activateEmacsIfRunning()
       end run
 
+      -- Handle org-protocol:// URLs (for org-capture, org-roam, etc.)
       on open location the_url
-        do shell script "/run/current-system/sw/bin/emacsclient -n -a \"\" " & quoted form of the_url
-        tell application "Emacs" to activate
+        my runClient("-n " & quoted form of the_url)
+        my activateEmacsIfRunning()
       end open location
-    '
+    EOF
 
-    echo "Registering org-protocol in Info.plist..."
-    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes list" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
-    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0 dict" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
-    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes list" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
-    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string org-protocol" "$out/Applications/Emacs Client.app/Contents/Info.plist" 2>/dev/null || true
+    /usr/bin/osacompile -o "$clientApp" "$clientScript"
+
+    echo "Updating Info.plist..."
+    plist_set CFBundleIdentifier string org.gnu.EmacsClient
+    plist_set CFBundleName string "Emacs Client"
+    plist_set CFBundleDisplayName string "Emacs Client"
+    plist_set CFBundleGetInfoString string "Emacs Client ${emacs-plus.version}"
+    plist_set CFBundleVersion string "${emacs-plus.version}"
+    plist_set CFBundleShortVersionString string "${emacs-plus.version}"
+    plist_set LSApplicationCategoryType string public.app-category.productivity
+    plist_set NSHumanReadableCopyright string "Copyright 1989-2026 Free Software Foundation, Inc."
+
+    /usr/libexec/PlistBuddy -c "Delete :CFBundleDocumentTypes" "$clientPlist" 2>/dev/null || true
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes array" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0 dict" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:CFBundleTypeRole string Editor" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:CFBundleTypeName string Text Document" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes array" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:0 string public.text" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:1 string public.plain-text" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:2 string public.source-code" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:3 string public.script" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:4 string public.shell-script" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleDocumentTypes:0:LSItemContentTypes:5 string public.data" "$clientPlist"
+
+    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes array" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0 dict" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLName string Org Protocol" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes array" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string org-protocol" "$clientPlist"
 
     echo "Copying custom dragon icons and Assets.car from emacs-plus..."
-    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$out/Applications/Emacs Client.app/Contents/Resources/applet.icns"
-    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$out/Applications/Emacs Client.app/Contents/Resources/droplet.icns"
-    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Assets.car" "$out/Applications/Emacs Client.app/Contents/Resources/Assets.car"
-    rm -f "$out/Applications/Emacs Client.app/Contents/Resources/droplet.rsrc"
+    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$clientResources/applet.icns"
+    rm -f "$clientResources/droplet.icns" "$clientResources/droplet.rsrc" "$clientResources/Assets.car"
+    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Assets.car" "$clientResources/Assets.car"
+    /usr/libexec/PlistBuddy -c "Delete :CFBundleIconName" "$clientPlist" 2>/dev/null || true
+    /usr/libexec/PlistBuddy -c "Add :CFBundleIconName string dragon" "$clientPlist"
+    /usr/libexec/PlistBuddy -c "Delete :CFBundleIconFile" "$clientPlist" 2>/dev/null || true
+    /usr/libexec/PlistBuddy -c "Add :CFBundleIconFile string applet" "$clientPlist"
   '';
 
   meta = {
