@@ -1,9 +1,13 @@
 {
   lib,
+  fetchurl,
   stdenv,
   emacs-plus,
 }:
 
+let
+  hashes = lib.importJSON ../emacs-plus/hashes.json;
+in
 stdenv.mkDerivation {
   pname = "emacs-client-app";
   version = emacs-plus.version;
@@ -109,10 +113,20 @@ stdenv.mkDerivation {
     /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes array" "$clientPlist"
     /usr/libexec/PlistBuddy -c "Add :CFBundleURLTypes:0:CFBundleURLSchemes:0 string org-protocol" "$clientPlist"
 
-    echo "Copying custom dragon icons and Assets.car from emacs-plus..."
-    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Emacs.icns" "$clientResources/applet.icns"
+    echo "Installing custom dragon icons and Assets.car..."
+    cp ${
+      fetchurl {
+        inherit (hashes.icon.icns) url;
+        hash = hashes.icon.icns.hash;
+      }
+    } "$clientResources/applet.icns"
     rm -f "$clientResources/droplet.icns" "$clientResources/droplet.rsrc" "$clientResources/Assets.car"
-    cp "${emacs-plus}/Applications/Emacs.app/Contents/Resources/Assets.car" "$clientResources/Assets.car"
+    cp ${
+      fetchurl {
+        inherit (hashes.icon.assets) url;
+        hash = hashes.icon.assets.hash;
+      }
+    } "$clientResources/Assets.car"
     /usr/libexec/PlistBuddy -c "Delete :CFBundleIconName" "$clientPlist" 2>/dev/null || true
     /usr/libexec/PlistBuddy -c "Add :CFBundleIconName string dragon" "$clientPlist"
     /usr/libexec/PlistBuddy -c "Delete :CFBundleIconFile" "$clientPlist" 2>/dev/null || true
