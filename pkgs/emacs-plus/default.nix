@@ -18,7 +18,7 @@ emacs30.overrideAttrs (oldAttrs: {
   pname = "emacs-plus";
   
   # Inject macOS file descriptor optimizations (prevents "too many open files" errors in LSP/Doom Emacs)
-  NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT";
+  NIX_CFLAGS_COMPILE = (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT -mcpu=native";
   
   # 1. Apply all patches defined in hashes.json
   patches = (oldAttrs.patches or []) ++ (map (name: fetchpatch {
