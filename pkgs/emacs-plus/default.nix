@@ -2,14 +2,36 @@
   lib,
   fetchurl,
   fetchpatch,
+  libgccjit,
+  makeWrapper,
+  stdenv,
   emacs30,
 }:
 
 let
   hashes = lib.importJSON ./hashes.json;
+  nativeCompBinPath = lib.makeBinPath [
+    libgccjit
+    stdenv.cc.cc
+    stdenv.cc.bintools
+    stdenv.cc.bintools.bintools
+  ];
+  nativeCompLibraryPath = lib.concatStringsSep ":" (
+    [
+      "${lib.getLib libgccjit}/lib/gcc"
+      "${lib.getLib stdenv.cc.libc}/lib"
+    ]
+    ++ lib.optionals (stdenv.cc ? cc.lib.libgcc) [
+      "${lib.getLib stdenv.cc.cc.lib.libgcc}/lib"
+    ]
+  );
 in
 emacs30.overrideAttrs (oldAttrs: {
   pname = "emacs-plus";
+
+  nativeBuildInputs = (oldAttrs.nativeBuildInputs or [ ]) ++ [
+    makeWrapper
+  ];
 
   # Inject macOS file descriptor optimizations (prevents "too many open files" errors in LSP/Doom Emacs)
   NIX_CFLAGS_COMPILE =
@@ -50,6 +72,10 @@ emacs30.overrideAttrs (oldAttrs: {
     /usr/libexec/PlistBuddy -c "Add :CFBundleDisplayName string Emacs" "$out/Applications/Emacs.app/Contents/Info.plist"
     /usr/libexec/PlistBuddy -c "Delete :CFBundleIconName" "$out/Applications/Emacs.app/Contents/Info.plist" 2>/dev/null || true
     /usr/libexec/PlistBuddy -c "Add :CFBundleIconName string dragon" "$out/Applications/Emacs.app/Contents/Info.plist"
+
+    wrapProgram "$out/Applications/Emacs.app/Contents/MacOS/Emacs" \
+      --prefix PATH : "${nativeCompBinPath}" \
+      --set LIBRARY_PATH "${nativeCompLibraryPath}"
   '';
 
   meta = oldAttrs.meta // {
