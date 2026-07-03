@@ -1,0 +1,42 @@
+{
+  "patches": {
+    "mac-font-use-typo-metrics": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/mac-font-use-typo-metrics/emacs-30.patch",
+      "hash": "sha256-MYOV04adNHnaRZM2C8sRpd8ItJS5lShwdNDXROxWLBc="
+    },
+    "aggressive-read-buffering": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/aggressive-read-buffering/emacs-30.patch",
+      "hash": "sha256-Nwas6hazk+FrK0adxjk6rY99J4qGIc05JMzm8IlUbp4="
+    },
+    "fix-window-role": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-window-role.patch",
+      "hash": "sha256-Rq5Z4CuEUBc7R9nNtzJ/DAdJ/ETyHq71QqVPr2zEACc="
+    },
+    "system-appearance": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch",
+      "hash": "sha256-nrPOgGQAJb/5brrrWJNDARY2jWNJ9OsMtO+LPVhHfbY="
+    },
+    "round-undecorated-frame": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/round-undecorated-frame.patch",
+      "hash": "sha256-fjnmlM6dylDbcsCb5ELBJ40ZANacJALyiXQq6ujqTD4="
+    },
+    "fix-macos-tahoe-scrolling": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-macos-tahoe-scrolling.patch",
+      "hash": "sha256-hHo4NGxdkXyDuowo1jyFAG5R4sDgjCojQ7Psmj9A44A="
+    },
+    "fix-ns-x-colors": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-ns-x-colors.patch",
+      "hash": "sha256-nl0+JqjTiNOgALaX1YJ2lkXKk61Ze0ETdE3rpLiai54="
+    }
+  },
+  "icon": {
+    "icns": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/icon.icns",
+      "hash": "sha256-Ac5A3rcPk5Tu8cxejtqTb6c/gMTAq5lkJUffAH0wFuk="
+    },
+    "assets": {
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/Assets.car",
+      "hash": "sha256-m/OW5n2ng2RRCseLaHbELiC5aEivbhwLn8R0b2K/nO4="
+    }
+  }
+}
