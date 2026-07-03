@@ -25,8 +25,9 @@
         };
       in
       {
-        packages = {
+        packages = rec {
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
+          emacs-client = pkgs.callPackage ./pkgs/emacs-client { inherit emacs-plus; };
           claude-code-ide = pkgs.emacsPackages.callPackage ./pkgs/claude-code-ide { };
           codex-ide = pkgs.emacsPackages.callPackage ./pkgs/codex-ide { };
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
