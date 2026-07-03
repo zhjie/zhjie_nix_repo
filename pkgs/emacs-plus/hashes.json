@@ -22,7 +22,7 @@
     },
     "fix-macos-tahoe-scrolling": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-macos-tahoe-scrolling.patch",
-      "hash": "sha256-hHo4NGxdkXyDuowo1jyFAG5R4sDgjCojQ7Psmj9A44A="
+      "hash": "sha256-Hf9oZ5ImBnxTLa6yS02UDzBEgJEGAwNq/svJ3S35uKw="
     },
     "fix-ns-x-colors": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-ns-x-colors.patch",
