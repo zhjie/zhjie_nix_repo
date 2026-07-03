@@ -17,7 +17,7 @@ stdenv.mkDerivation {
     clientResources="$clientApp/Contents/Resources"
     clientScript="$PWD/emacs-client.applescript"
     clientPath="/run/current-system/sw/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    emacs="${emacs-plus}/Applications/Emacs.app/Contents/MacOS/Emacs"
+    emacsApp="${emacs-plus}/Applications/Emacs.app"
     emacsclient="${emacs-plus}/bin/emacsclient"
 
     plist_set() {
@@ -33,12 +33,21 @@ stdenv.mkDerivation {
       -- Emacs Client AppleScript Application
       -- Handles opening files from Finder, drag-and-drop, and launching from Spotlight/Dock
 
-      on runClient(clientArgs)
+      on runClient(clientArgs, fallbackArgs)
         try
           do shell script "PATH='$clientPath' '$emacsclient' " & clientArgs
         on error
-          do shell script "'$emacs' --daemon"
-          do shell script "PATH='$clientPath' '$emacsclient' " & clientArgs
+          do shell script "open " & quoted form of "$emacsApp"
+          if fallbackArgs is not "" then
+            repeat 50 times
+              try
+                do shell script "PATH='$clientPath' '$emacsclient' " & fallbackArgs
+                return
+              end try
+              delay 0.1
+            end repeat
+            do shell script "PATH='$clientPath' '$emacsclient' " & fallbackArgs
+          end if
         end try
       end runClient
 
@@ -51,20 +60,20 @@ stdenv.mkDerivation {
       on open the_files
         repeat with the_file in the_files
           set dropPath to quoted form of (POSIX path of the_file)
-          my runClient("-c -n " & dropPath)
+          my runClient("-c -n " & dropPath, "-n " & dropPath)
         end repeat
         my activateEmacsIfRunning()
       end open
 
       -- Handle launch without files (from Spotlight, Dock, or Finder)
       on run
-        my runClient("-c -n")
+        my runClient("-c -n", "")
         my activateEmacsIfRunning()
       end run
 
       -- Handle org-protocol:// URLs (for org-capture, org-roam, etc.)
       on open location the_url
-        my runClient("-n " & quoted form of the_url)
+        my runClient("-n " & quoted form of the_url, "-n " & quoted form of the_url)
         my activateEmacsIfRunning()
       end open location
     EOF

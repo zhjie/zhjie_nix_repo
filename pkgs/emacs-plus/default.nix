@@ -7,14 +7,6 @@
 
 let
   hashes = lib.importJSON ./hashes.json;
-
-  # Fetch a patch from emacs-plus hashes
-  fetchEmacsPlusPatch =
-    name:
-    fetchpatch {
-      inherit (hashes.patches.${name}) url;
-      hash = hashes.patches.${name}.hash;
-    };
 in
 emacs30.overrideAttrs (oldAttrs: {
   pname = "emacs-plus";
