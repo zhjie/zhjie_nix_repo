@@ -30,6 +30,7 @@ melpaBuild {
 
   packageRequires = [
     ghostel
+    evil
   ];
 
   meta = {
