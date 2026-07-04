@@ -57,12 +57,17 @@ let
     ''
     + lib.optionalString stdenv.hostPlatform.isDarwin ''
       substituteInPlace build.zig \
-        --replace-fail '.macos => "../ghostel-module.dylib",' \
+        --replace-fail '.macos => "ghostel-module.dylib",' \
                        '.macos => "lib/ghostel-module.dylib",'
     '';
   });
 
   libExt = stdenv.hostPlatform.extensions.sharedLibrary;
+  moduleFile =
+    if stdenv.hostPlatform.isDarwin then
+      "${module}/lib/ghostel-module${libExt}"
+    else
+      "${module}/ghostel-module${libExt}";
 in
 melpaBuild {
   inherit pname version src;
@@ -72,7 +77,7 @@ melpaBuild {
   '';
 
   preBuild = ''
-    install ${module}/lib/libghostel-module${libExt} ghostel-module${libExt}
+    install ${moduleFile} ghostel-module${libExt}
   '';
 
   passthru = {

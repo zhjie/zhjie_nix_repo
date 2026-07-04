@@ -77,6 +77,6 @@ jq -n \
   '{ version: $version, rev: $rev, sourceHash: $sourceHash, zigDepsHash: $zigDepsHash }' \
   > "$HASHES_FILE"
 
-printf 'Verifying updated ghostel build...\n'
-nix build "$REPO_ROOT#packages.${SYSTEM}.ghostel.module" --no-link
+printf 'Verifying updated ghostel package build...\n'
+nix build "$REPO_ROOT#packages.${SYSTEM}.ghostel" --no-link
 printf 'Updated ghostel to %s\n' "$LATEST"
