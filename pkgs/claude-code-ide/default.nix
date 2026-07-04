@@ -28,7 +28,7 @@ melpaBuild {
   ];
 
   meta = {
-    description = "Claude Code IDE integration for Emacs";
+    description = "Claude Code IDE for Emacs";
     homepage = "https://github.com/manzaltu/claude-code-ide.el";
     license = lib.licenses.gpl3Plus;
   };

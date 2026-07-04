@@ -24,7 +24,7 @@ melpaBuild {
   ];
 
   meta = {
-    description = "Codex app-server integration for Emacs";
+    description = "Codex IDE for Emacs";
     homepage = "https://github.com/dgillis/emacs-codex-ide";
     license = lib.licenses.gpl3Plus;
   };

@@ -55,8 +55,8 @@ buildNpmPackage {
   '';
 
   meta = {
-    description = "A developer friendly library to generate docx files";
-    homepage = "https://docx.js.org/";
+    description = "Easily generate and modify .docx files with JS/TS. Works for Node and on the Browser.";
+    homepage = "https://github.com/dolanmiu/docx";
     changelog = "https://github.com/dolanmiu/docx/releases/tag/v${version}";
     license = lib.licenses.mit;
     sourceProvenance = with lib.sourceTypes; [ binaryBytecode ];

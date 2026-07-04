@@ -33,7 +33,7 @@ stdenv.mkDerivation (finalAttrs: {
   ];
 
   meta = {
-    description = "QTerm is a BBS client based on Qt";
+    description = "QTerm --- BBS client based on Qt";
     homepage = "https://github.com/qterm/qterm";
     license = lib.licenses.gpl3Only;
     platforms = lib.platforms.linux;

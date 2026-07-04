@@ -55,7 +55,7 @@ buildNpmPackage {
   '';
 
   meta = {
-    description = "PowerPoint PPTX Generation JavaScript Library";
+    description = "Build PowerPoint presentations with JavaScript";
     homepage = "https://gitbrent.github.io/PptxGenJS/";
     changelog = "https://github.com/gitbrent/PptxGenJS/releases/tag/v${version}";
     license = lib.licenses.mit;
