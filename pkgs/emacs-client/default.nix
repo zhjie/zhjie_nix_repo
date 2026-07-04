@@ -2,7 +2,6 @@
   lib,
   fetchurl,
   stdenv,
-  emacs-plus,
 }:
 
 let
@@ -10,7 +9,7 @@ let
 in
 stdenv.mkDerivation {
   pname = "emacs-client-app";
-  version = emacs-plus.version;
+  version = "1.0";
 
   phases = [ "installPhase" ];
 
@@ -21,8 +20,8 @@ stdenv.mkDerivation {
     clientResources="$clientApp/Contents/Resources"
     clientScript="$PWD/emacs-client.applescript"
     clientPath="/run/current-system/sw/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-    emacsApp="${emacs-plus}/Applications/Emacs.app"
-    emacsclient="${emacs-plus}/bin/emacsclient"
+    emacsApp="/Applications/Nix Apps/Emacs.app"
+    emacsclient="emacsclient"
 
     plist_set() {
       key="$1"
@@ -88,9 +87,9 @@ stdenv.mkDerivation {
     plist_set CFBundleIdentifier string org.gnu.EmacsClient
     plist_set CFBundleName string "Emacs Client"
     plist_set CFBundleDisplayName string "Emacs Client"
-    plist_set CFBundleGetInfoString string "Emacs Client ${emacs-plus.version}"
-    plist_set CFBundleVersion string "${emacs-plus.version}"
-    plist_set CFBundleShortVersionString string "${emacs-plus.version}"
+    plist_set CFBundleGetInfoString string "Emacs Client 1.0"
+    plist_set CFBundleVersion string "1.0"
+    plist_set CFBundleShortVersionString string "1.0"
     plist_set LSApplicationCategoryType string public.app-category.productivity
     plist_set NSHumanReadableCopyright string "Copyright 1989-2026 Free Software Foundation, Inc."
 

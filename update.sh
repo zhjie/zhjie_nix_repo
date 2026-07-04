@@ -7,6 +7,7 @@ SYSTEM="${SYSTEM:-$(nix eval --raw --impure --expr builtins.currentSystem)}"
 
 PACKAGES=(
   emacs-plus
+  emacs-plus-31
   claude-code-ide
   codex-ide
   docx
@@ -31,6 +32,7 @@ nix eval "$ROOT#packages.${SYSTEM}" --apply builtins.attrNames
 printf '\n==> Verifying dry-run builds on %s\n' "$SYSTEM"
 nix build --dry-run \
   "$ROOT#packages.${SYSTEM}.emacs-plus" \
+  "$ROOT#packages.${SYSTEM}.emacs-plus-31" \
   "$ROOT#packages.${SYSTEM}.claude-code-ide" \
   "$ROOT#packages.${SYSTEM}.codex-ide" \
   "$ROOT#packages.${SYSTEM}.docx" \
