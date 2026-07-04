@@ -31,6 +31,7 @@
           claude-code-ide = pkgs.emacsPackages.callPackage ./pkgs/claude-code-ide { };
           codex-ide = pkgs.emacsPackages.callPackage ./pkgs/codex-ide { };
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
+          evil-ghostel = pkgs.emacsPackages.callPackage ./pkgs/evil-ghostel { inherit ghostel; };
           docx = pkgs.callPackage ./pkgs/docx { };
           pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
