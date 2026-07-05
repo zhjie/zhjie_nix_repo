@@ -38,7 +38,7 @@ emacs31.overrideAttrs (oldAttrs: {
 
   # Inject macOS file descriptor optimizations (prevents "too many open files" errors in LSP/Doom Emacs)
   NIX_CFLAGS_COMPILE =
-    (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT -mcpu=native";
+    (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT";
 
   # 1. Apply all patches defined in hashes.json after nixpkgs' Emacs patches.
   patches =
