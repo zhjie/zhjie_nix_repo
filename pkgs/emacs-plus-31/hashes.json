@@ -2,23 +2,23 @@
   "patches": {
     "mac-font-use-typo-metrics": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/mac-font-use-typo-metrics/emacs-31.patch",
-      "hash": "sha256-MYOV04adNHnaRZM2C8sRpd8ItJS5lShwdNDXROxWLBc="
+      "hash": "sha256-ZTCy7UMn6G27dVTwMoXtdfV9cCs+gxcOS/78A13dL/o="
     },
     "aggressive-read-buffering": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/aggressive-read-buffering/emacs-31.patch",
-      "hash": "sha256-j1NQ68QsYe4Ft8IcrQ5V6b0sTaSeAjt0zHb9ulWV9qM="
+      "hash": "sha256-4w8/310XDuLROZfiwxfnqmBWZtinIT3EomcKLh8d58A="
     },
     "system-appearance": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/system-appearance.patch",
-      "hash": "sha256-Uyg1A9te0oh+nXM7qq+A8sgQ5mjngumIvaWFWgsevrQ="
+      "hash": "sha256-4+2U+4+2tpuaThNJfZOjy1JPnneGcsoge9r+WpgNDko="
     },
     "round-undecorated-frame": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/round-undecorated-frame.patch",
-      "hash": "sha256-yUMKHq2B4xOz0od/9vgET7KUQe7MfMQgAFFdfI7GOA8="
+      "hash": "sha256-KCMEvJzN1OkwFYoMLpZghvdeoO1Ckcxk3Mo19YAf850="
     },
     "fix-ns-x-colors": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/fix-ns-x-colors.patch",
-      "hash": "sha256-nl0+JqjTiNOgALaX1YJ2lkXKk61Ze0ETdE3rpLiai54="
+      "hash": "sha256-oe3DFgEXwp0cZJl+ufWqTonaeWSliikTRsVDNbcy4Yw="
     }
   },
   "icon": {

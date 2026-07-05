@@ -2,31 +2,31 @@
   "patches": {
     "mac-font-use-typo-metrics": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/mac-font-use-typo-metrics/emacs-30.patch",
-      "hash": "sha256-MYOV04adNHnaRZM2C8sRpd8ItJS5lShwdNDXROxWLBc="
+      "hash": "sha256-ZTCy7UMn6G27dVTwMoXtdfV9cCs+gxcOS/78A13dL/o="
     },
     "aggressive-read-buffering": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/aggressive-read-buffering/emacs-30.patch",
-      "hash": "sha256-Nwas6hazk+FrK0adxjk6rY99J4qGIc05JMzm8IlUbp4="
+      "hash": "sha256-WzPfcgF0IGU8jlEjU6Bryo4u/GZNpbr5B26qEpIhi5o="
     },
     "fix-window-role": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/fix-window-role.patch",
-      "hash": "sha256-H4Qj6n5uZsmsbdjjexGZctqhJk3gAXKiSnmnEO/LgTA="
+      "hash": "sha256-+z/KfsBm1lvZTZNiMbxzXQGRTjkCFO4QPlEK35upjsE="
     },
     "system-appearance": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch",
-      "hash": "sha256-nrPOgGQAJb/5brrrWJNDARY2jWNJ9OsMtO+LPVhHfbY="
+      "hash": "sha256-3QLq91AQ6E921/W9nfDjdOUWR8YVsqBAT/W9c1woqAw="
     },
     "round-undecorated-frame": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/round-undecorated-frame.patch",
-      "hash": "sha256-fjnmlM6dylDbcsCb5ELBJ40ZANacJALyiXQq6ujqTD4="
+      "hash": "sha256-fesZ0H3LO6T2AiRV8ASozKxZBpvVzwLEcLDy6rctR6c="
     },
     "fix-macos-tahoe-scrolling": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-macos-tahoe-scrolling.patch",
-      "hash": "sha256-hHo4NGxdkXyDuowo1jyFAG5R4sDgjCojQ7Psmj9A44A="
+      "hash": "sha256-Hf9oZ5ImBnxTLa6yS02UDzBEgJEGAwNq/svJ3S35uKw="
     },
     "fix-ns-x-colors": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-ns-x-colors.patch",
-      "hash": "sha256-nl0+JqjTiNOgALaX1YJ2lkXKk61Ze0ETdE3rpLiai54="
+      "hash": "sha256-oe3DFgEXwp0cZJl+ufWqTonaeWSliikTRsVDNbcy4Yw="
     }
   },
   "icon": {

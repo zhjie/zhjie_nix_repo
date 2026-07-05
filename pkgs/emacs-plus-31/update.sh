@@ -48,7 +48,20 @@ for i in "${!PATCHES[@]}"; do
   patch="${PATCHES[$i]}"
   url=$(get_patch_url "$patch" "$EMACS_VERSION")
   echo "Prefetching patch: $patch from $url..."
-  hash=$(nix store prefetch-file --json "$url" | jq -r '.hash')
+  set +e
+  output=$(
+    nix build --no-link --impure --expr \
+      "let pkgs = import <nixpkgs> {}; in pkgs.fetchpatch { url = \"$url\"; hash = pkgs.lib.fakeHash; }" \
+      2>&1
+  )
+  status=$?
+  set -e
+  hash=$(printf '%s\n' "$output" | sed -n 's/.*got: *//p' | tail -n 1)
+  if [ "$status" -eq 0 ] || [ -z "$hash" ]; then
+    printf '%s\n' "$output" >&2
+    echo "Failed to prefetch normalized fetchpatch hash for $patch" >&2
+    exit 1
+  fi
   
   if [ $i -ne 0 ]; then
     PATCHES_JSON+=$',\n'
