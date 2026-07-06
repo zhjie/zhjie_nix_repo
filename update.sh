@@ -52,7 +52,7 @@ PACKAGES=(
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "evil-ghostel|evil-ghostel|evil-ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
-  "pi-coding-agent|pi-coding-agent|pi-coding-agent|git-tag-v|https://github.com/earendil-works/pi.git|Auto"
+  "pi-coding-agent|pi-coding-agent|pi-coding-agent|npm|@earendil-works/pi-coding-agent|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
