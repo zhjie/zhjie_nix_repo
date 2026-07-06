@@ -52,6 +52,7 @@ PACKAGES=(
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "evil-ghostel|evil-ghostel|evil-ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
+  "pi-coding-agent|pi-coding-agent|pi-coding-agent|git-tag-v|https://github.com/earendil-works/pi.git|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
@@ -350,6 +351,7 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.ghostel" \
     "$ROOT#packages.${SYSTEM}.evil-ghostel" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
+    "$ROOT#packages.${SYSTEM}.pi-coding-agent" \
     "$ROOT#packages.${SYSTEM}.pptxgenjs"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then

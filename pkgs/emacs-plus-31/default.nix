@@ -8,21 +8,22 @@
 
 let
   hashes = lib.importJSON ./hashes.json;
+  inherit (hashes) version rev;
   emacs31 = pkgs.callPackage (
     import "${pkgs.path}/pkgs/applications/editors/emacs/make-emacs.nix" {
       pname = "emacs";
-      version = "31.0.90-unstable-2026-07-03";
+      inherit version;
       variant = "mainline";
       src = fetchgit {
         url = "https://github.com/emacs-mirror/emacs.git";
-        rev = "7d01f8f7a4e1b2a5608d2c866309ef4074ecf404";
+        inherit rev;
         branchName = "emacs-31";
-        hash = "sha256-EqvTpBbBT/MSLqfVfwXfU3HHqxe80YIggCFQ66gl9y4=";
+        hash = hashes.sourceHash;
       };
       meta = {
         homepage = "https://www.gnu.org/software/emacs/";
         description = "Extensible, customizable GNU text editor";
-        changelog = "https://cgit.git.savannah.gnu.org/cgit/emacs.git/plain/etc/NEWS?h=7d01f8f7a4e1b2a5608d2c866309ef4074ecf404";
+        changelog = "https://cgit.git.savannah.gnu.org/cgit/emacs.git/plain/etc/NEWS?h=${rev}";
         license = lib.licenses.gpl3Plus;
         platforms = lib.platforms.all;
         mainProgram = "emacs";
