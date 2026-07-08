@@ -5,7 +5,7 @@
 | Package | Local | Upstream | Status/Action | Maintenance |
 | :--- | :--- | :--- | :--- | :--- |
 | [emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus) | Patch hashes | Patch sources | Refresh hashes | Auto |
-| [emacs-plus-31](https://github.com/d12frosted/homebrew-emacs-plus) | 31.0.90-unstable-2026-07-05 | Patch sources | Refresh hashes | Auto |
+| [emacs-plus-31](https://github.com/d12frosted/homebrew-emacs-plus) | 31.0.90-unstable-2026-07-07 | Patch sources | Refresh hashes | Auto |
 | [claude-code-ide](https://github.com/manzaltu/claude-code-ide.el) | 0.2.7-unstable-2026-07-02 | 0.2.7-unstable-2026-07-02 | Up to date | Auto |
 | [codex-ide](https://github.com/dgillis/emacs-codex-ide) | 0.3.2-unstable-2026-07-07 | 0.3.2-unstable-2026-07-07 | Up to date | Auto |
 | [docx](https://github.com/dolanmiu/docx) | 9.7.1 | 9.7.1 | Up to date | Auto |

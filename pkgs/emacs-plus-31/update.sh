@@ -29,17 +29,27 @@ PATCHES=(
   "fix-ns-x-colors"
 )
 
+PATCHES_REPO_URL="https://github.com/d12frosted/homebrew-emacs-plus.git"
+echo "Resolving current commit of homebrew-emacs-plus master branch..."
+PATCHES_REV=$(git ls-remote "$PATCHES_REPO_URL" refs/heads/master | cut -f1)
+if [ -z "$PATCHES_REV" ]; then
+  echo "Failed to get current commit of homebrew-emacs-plus master branch" >&2
+  exit 1
+fi
+echo "Using homebrew-emacs-plus commit: $PATCHES_REV"
+
 # Helper function to get correct URL for a patch
 get_patch_url() {
   local name="$1"
   local ver="$2"
+  local rev="$3"
   local url
   # Community patches are under community/patches/<name>/emacs-<ver>.patch
   if [ "$name" = "mac-font-use-typo-metrics" ] || [ "$name" = "aggressive-read-buffering" ]; then
-    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/${name}/emacs-${ver}.patch"
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/community/patches/${name}/emacs-${ver}.patch"
   else
     # Built-in patches are under patches/emacs-<ver>/<name>.patch
-    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-${ver}/${name}.patch"
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/emacs-${ver}/${name}.patch"
   fi
 
   # Resolve Git symlink if the target is a relative path (e.g. starting with ../)
@@ -49,7 +59,7 @@ get_patch_url() {
     # e.g., if content is ../emacs-28/fix-window-role.patch
     # strip the leading "../" and prepend the base repo patches path
     local rel_path=${content#../}
-    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/${rel_path}"
+    url="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${rev}/patches/${rel_path}"
   fi
   echo "$url"
 }
@@ -97,7 +107,7 @@ echo "Fetching patches hashes..."
 PATCHES_JSON="{"
 for i in "${!PATCHES[@]}"; do
   patch="${PATCHES[$i]}"
-  url=$(get_patch_url "$patch" "$EMACS_MAJOR_VERSION")
+  url=$(get_patch_url "$patch" "$EMACS_MAJOR_VERSION" "$PATCHES_REV")
   echo "Prefetching patch: $patch from $url..."
   set +e
   output=$(
@@ -123,11 +133,11 @@ PATCHES_JSON+="}"
 
 # Fetch icon
 echo "Fetching icon hashes..."
-ICNS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/icon.icns"
+ICNS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/icon.icns"
 echo "Prefetching icon.icns..."
 ICNS_HASH=$(nix store prefetch-file --json "$ICNS_URL" | jq -r '.hash')
 
-ASSETS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/Assets.car"
+ASSETS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/Assets.car"
 echo "Prefetching Assets.car..."
 ASSETS_HASH=$(nix store prefetch-file --json "$ASSETS_URL" | jq -r '.hash')
 

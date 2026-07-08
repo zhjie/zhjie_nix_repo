@@ -1,41 +1,41 @@
 {
   "patches": {
     "mac-font-use-typo-metrics": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/mac-font-use-typo-metrics/emacs-30.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/patches/mac-font-use-typo-metrics/emacs-30.patch",
       "hash": "sha256-ZTCy7UMn6G27dVTwMoXtdfV9cCs+gxcOS/78A13dL/o="
     },
     "aggressive-read-buffering": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/aggressive-read-buffering/emacs-30.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/patches/aggressive-read-buffering/emacs-30.patch",
       "hash": "sha256-WzPfcgF0IGU8jlEjU6Bryo4u/GZNpbr5B26qEpIhi5o="
     },
     "fix-window-role": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-28/fix-window-role.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-28/fix-window-role.patch",
       "hash": "sha256-+z/KfsBm1lvZTZNiMbxzXQGRTjkCFO4QPlEK35upjsE="
     },
     "system-appearance": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/system-appearance.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-30/system-appearance.patch",
       "hash": "sha256-3QLq91AQ6E921/W9nfDjdOUWR8YVsqBAT/W9c1woqAw="
     },
     "round-undecorated-frame": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/round-undecorated-frame.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-30/round-undecorated-frame.patch",
       "hash": "sha256-fesZ0H3LO6T2AiRV8ASozKxZBpvVzwLEcLDy6rctR6c="
     },
     "fix-macos-tahoe-scrolling": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-macos-tahoe-scrolling.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-30/fix-macos-tahoe-scrolling.patch",
       "hash": "sha256-Hf9oZ5ImBnxTLa6yS02UDzBEgJEGAwNq/svJ3S35uKw="
     },
     "fix-ns-x-colors": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-30/fix-ns-x-colors.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-30/fix-ns-x-colors.patch",
       "hash": "sha256-oe3DFgEXwp0cZJl+ufWqTonaeWSliikTRsVDNbcy4Yw="
     }
   },
   "icon": {
     "icns": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/icon.icns",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/icons/dragon-plus/icon.icns",
       "hash": "sha256-Ac5A3rcPk5Tu8cxejtqTb6c/gMTAq5lkJUffAH0wFuk="
     },
     "assets": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/Assets.car",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/icons/dragon-plus/Assets.car",
       "hash": "sha256-m/OW5n2ng2RRCseLaHbELiC5aEivbhwLn8R0b2K/nO4="
     }
   }

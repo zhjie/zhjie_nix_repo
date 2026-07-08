@@ -4,33 +4,33 @@
   "sourceHash": "sha256-RLYHdbvQYCVm02AWP3nM+PhcriDBimgHlPN/CVqudzQ=",
   "patches": {
     "mac-font-use-typo-metrics": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/mac-font-use-typo-metrics/emacs-31.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/patches/mac-font-use-typo-metrics/emacs-31.patch",
       "hash": "sha256-ZTCy7UMn6G27dVTwMoXtdfV9cCs+gxcOS/78A13dL/o="
     },
     "aggressive-read-buffering": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/patches/aggressive-read-buffering/emacs-31.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/patches/aggressive-read-buffering/emacs-31.patch",
       "hash": "sha256-4w8/310XDuLROZfiwxfnqmBWZtinIT3EomcKLh8d58A="
     },
     "system-appearance": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/system-appearance.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-31/system-appearance.patch",
       "hash": "sha256-4+2U+4+2tpuaThNJfZOjy1JPnneGcsoge9r+WpgNDko="
     },
     "round-undecorated-frame": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/round-undecorated-frame.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-31/round-undecorated-frame.patch",
       "hash": "sha256-KCMEvJzN1OkwFYoMLpZghvdeoO1Ckcxk3Mo19YAf850="
     },
     "fix-ns-x-colors": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/patches/emacs-31/fix-ns-x-colors.patch",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/patches/emacs-31/fix-ns-x-colors.patch",
       "hash": "sha256-oe3DFgEXwp0cZJl+ufWqTonaeWSliikTRsVDNbcy4Yw="
     }
   },
   "icon": {
     "icns": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/icon.icns",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/icons/dragon-plus/icon.icns",
       "hash": "sha256-Ac5A3rcPk5Tu8cxejtqTb6c/gMTAq5lkJUffAH0wFuk="
     },
     "assets": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/master/community/icons/dragon-plus/Assets.car",
+      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/icons/dragon-plus/Assets.car",
       "hash": "sha256-m/OW5n2ng2RRCseLaHbELiC5aEivbhwLn8R0b2K/nO4="
     }
   }
