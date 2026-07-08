@@ -1,6 +1,6 @@
 {
   "version": "31.0.90-unstable-2026-07-05",
-  "rev": "6464453558e54035360f796a6ee351b5f3e4a461",
+  "rev": "7621ee1d01229d50e5c0cddea6bf0b01095a62cf",
   "sourceHash": "sha256-mqUgYQAil+6TIwam9VHLE38GJovIcUkMBZcag54PiiU=",
   "patches": {
     "mac-font-use-typo-metrics": {
