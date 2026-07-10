@@ -31,12 +31,21 @@ PATCHES=(
 
 PATCHES_REPO_URL="https://github.com/d12frosted/homebrew-emacs-plus.git"
 echo "Resolving current commit of homebrew-emacs-plus master branch..."
-PATCHES_REV=$(git ls-remote "$PATCHES_REPO_URL" refs/heads/master | cut -f1)
-if [ -z "$PATCHES_REV" ]; then
+NEW_PATCHES_REV=$(git ls-remote "$PATCHES_REPO_URL" refs/heads/master | cut -f1)
+if [ -z "$NEW_PATCHES_REV" ]; then
   echo "Failed to get current commit of homebrew-emacs-plus master branch" >&2
   exit 1
 fi
-echo "Using homebrew-emacs-plus commit: $PATCHES_REV"
+echo "Using homebrew-emacs-plus commit: $NEW_PATCHES_REV"
+
+# Extract existing revision from hashes.json if it exists
+EXISTING_PATCHES_REV=""
+if [ -f "$HASHES_FILE" ]; then
+  EXISTING_URL=$(jq -r '.. | .url? // empty' "$HASHES_FILE" | grep 'homebrew-emacs-plus' | head -n1 || true)
+  if [ -n "$EXISTING_URL" ]; then
+    EXISTING_PATCHES_REV=$(printf '%s\n' "$EXISTING_URL" | sed -nE 's|.*/homebrew-emacs-plus/([^/]+)/.*|\1|p' | head -n1)
+  fi
+fi
 
 # Helper function to get correct URL for a patch
 get_patch_url() {
@@ -107,7 +116,7 @@ echo "Fetching patches hashes..."
 PATCHES_JSON="{"
 for i in "${!PATCHES[@]}"; do
   patch="${PATCHES[$i]}"
-  url=$(get_patch_url "$patch" "$EMACS_MAJOR_VERSION" "$PATCHES_REV")
+  url=$(get_patch_url "$patch" "$EMACS_MAJOR_VERSION" "$NEW_PATCHES_REV")
   echo "Prefetching patch: $patch from $url..."
   set +e
   output=$(
@@ -115,10 +124,10 @@ for i in "${!PATCHES[@]}"; do
       "let pkgs = import <nixpkgs> {}; in pkgs.fetchpatch { url = \"$url\"; hash = pkgs.lib.fakeHash; }" \
       2>&1
   )
-  status=$?
+  rc=$?
   set -e
   hash=$(printf '%s\n' "$output" | sed -n 's/.*got: *//p' | tail -n 1)
-  if [ "$status" -eq 0 ] || [ -z "$hash" ]; then
+  if [ "$rc" -eq 0 ] || [ -z "$hash" ]; then
     printf '%s\n' "$output" >&2
     echo "Failed to prefetch normalized fetchpatch hash for $patch" >&2
     exit 1
@@ -133,13 +142,53 @@ PATCHES_JSON+="}"
 
 # Fetch icon
 echo "Fetching icon hashes..."
-ICNS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/icon.icns"
+ICNS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${NEW_PATCHES_REV}/community/icons/dragon-plus/icon.icns"
 echo "Prefetching icon.icns..."
 ICNS_HASH=$(nix store prefetch-file --json "$ICNS_URL" | jq -r '.hash')
 
-ASSETS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/Assets.car"
+ASSETS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${NEW_PATCHES_REV}/community/icons/dragon-plus/Assets.car"
 echo "Prefetching Assets.car..."
 ASSETS_HASH=$(nix store prefetch-file --json "$ASSETS_URL" | jq -r '.hash')
+
+# Check if all hashes match
+ALL_MATCH=0
+if [ -n "$EXISTING_PATCHES_REV" ]; then
+  ALL_MATCH=1
+  for patch in "${PATCHES[@]}"; do
+    new_hash=$(printf '%s\n' "$PATCHES_JSON" | jq -r --arg patch "$patch" '.[$patch].hash')
+    existing_hash=$(jq -r --arg patch "$patch" '.patches[$patch].hash // empty' "$HASHES_FILE" || true)
+    if [ "$new_hash" != "$existing_hash" ]; then
+      ALL_MATCH=0
+      break
+    fi
+  done
+  
+  if [ "$ALL_MATCH" -eq 1 ]; then
+    existing_count=$(jq '.patches | length' "$HASHES_FILE" || true)
+    if [ "$existing_count" -ne "${#PATCHES[@]}" ]; then
+      ALL_MATCH=0
+    fi
+  fi
+
+  if [ "$ALL_MATCH" -eq 1 ]; then
+    existing_icns_hash=$(jq -r '.icon.icns.hash // empty' "$HASHES_FILE" || true)
+    existing_assets_hash=$(jq -r '.icon.assets.hash // empty' "$HASHES_FILE" || true)
+    if [ "$existing_icns_hash" != "$ICNS_HASH" ] || [ "$existing_assets_hash" != "$ASSETS_HASH" ]; then
+      ALL_MATCH=0
+    fi
+  fi
+fi
+
+if [ "$ALL_MATCH" -eq 1 ]; then
+  echo "All hashes are unchanged. Keeping existing pin in URL: $EXISTING_PATCHES_REV"
+  PATCHES_REV="$EXISTING_PATCHES_REV"
+  PATCHES_JSON="${PATCHES_JSON//"$NEW_PATCHES_REV"/"$EXISTING_PATCHES_REV"}"
+  ICNS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/icon.icns"
+  ASSETS_URL="https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/${PATCHES_REV}/community/icons/dragon-plus/Assets.car"
+else
+  echo "Hashes have updated. Using new pin: $NEW_PATCHES_REV"
+  PATCHES_REV="$NEW_PATCHES_REV"
+fi
 
 jq -n \
   --arg version "$EMACS_PACKAGE_VERSION" \

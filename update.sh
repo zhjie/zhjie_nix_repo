@@ -56,6 +56,7 @@ PACKAGES=(
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
+  "arrow-cpp|arrow-cpp|arrow-cpp|nixpkgs||Auto"
   "emacs-client|emacs-client|emacs-client|manual|1.0|Manual"
 )
 
@@ -217,6 +218,11 @@ check_package() {
       upstream_version="Patch sources"
       status="Refresh hashes"
       ;;
+    nixpkgs)
+      local_version="$(nix eval --raw "$ROOT#packages.${SYSTEM}.${attr}.version" 2>/dev/null || echo "Unknown")"
+      upstream_version="Nixpkgs"
+      status="Up to date"
+      ;;
     manual)
       local_version="$arg"
       upstream_version="Manual"
@@ -352,7 +358,8 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.evil-ghostel" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
     "$ROOT#packages.${SYSTEM}.pi-coding-agent" \
-    "$ROOT#packages.${SYSTEM}.pptxgenjs"
+    "$ROOT#packages.${SYSTEM}.pptxgenjs" \
+    "$ROOT#packages.${SYSTEM}.arrow-cpp"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then
     nix build --dry-run \
