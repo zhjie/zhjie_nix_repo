@@ -51,7 +51,7 @@ printf '  package-lock.json updated\n'
 
 # ── npmDepsHash ───────────────────────────────────────────────────────────────
 printf 'Computing npmDepsHash...\n'
-NPM_DEPS_HASH="$(nix run nixpkgs#prefetch-npm-deps -- "$LOCKFILE" 2>/dev/null)"
+NPM_DEPS_HASH="$(NPM_FETCHER_VERSION=2 nix run --inputs-from "$SCRIPT_DIR/../.." nixpkgs#prefetch-npm-deps -- "$LOCKFILE" 2>/dev/null)"
 printf '  npmDepsHash: %s\n' "$NPM_DEPS_HASH"
 
 # ── Write hashes.json ─────────────────────────────────────────────────────────
