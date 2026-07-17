@@ -8,13 +8,11 @@
   runCommand,
   versionCheckHook,
   writableTmpDirAsHomeHook,
-  makeWrapper,
 }:
 
 let
-  hashes = lib.importJSON ./hashes.json;
-  version = hashes.version;
-  packageRoot = "$out/lib/node_modules/@earendil-works/pi-coding-agent";
+  versionData = lib.importJSON ./hashes.json;
+  version = versionData.version;
 
   # Create a source with package-lock.json included
   srcWithLock = runCommand "pi-src-with-lock" { } ''
@@ -22,7 +20,7 @@ let
     tar -xzf ${
       fetchurl {
         url = "https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-${version}.tgz";
-        hash = hashes.sourceHash;
+        hash = versionData.sourceHash;
       }
     } -C $out --strip-components=1
     rm -f $out/npm-shrinkwrap.json
@@ -36,7 +34,7 @@ buildNpmPackage {
 
   src = srcWithLock;
 
-  npmDepsHash = hashes.npmDepsHash;
+  npmDepsHash = versionData.npmDepsHash;
   makeCacheWritable = true;
 
   # The package from npm is already built
@@ -56,7 +54,6 @@ buildNpmPackage {
 
     bun build --compile ./dist/bun/cli.js ./src/utils/image-resize-worker.ts --outfile dist/pi
   '';
-
 
   postInstall = ''
     pkgdir=$out/libexec/pi
@@ -86,7 +83,6 @@ buildNpmPackage {
       --set PI_SKIP_VERSION_CHECK 1 \
       --set PI_TELEMETRY 0
   '';
-
 
   doInstallCheck = true;
   nativeInstallCheckInputs = [
