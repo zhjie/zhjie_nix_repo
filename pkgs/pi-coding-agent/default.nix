@@ -1,6 +1,7 @@
 {
   lib,
   buildNpmPackage,
+  bun,
   fetchurl,
   fd,
   ripgrep,
@@ -8,7 +9,6 @@
   versionCheckHook,
   writableTmpDirAsHomeHook,
   makeWrapper,
-  bun,
 }:
 
 let
@@ -42,32 +42,51 @@ buildNpmPackage {
   # The package from npm is already built
   dontNpmBuild = true;
 
-  nativeBuildInputs = [
-    makeWrapper
-  ];
+  nativeBuildInputs = [ bun ];
 
-  # Run upstream's Bun entry point with Bun; keeps Node out of the closure
-  # and adds aarch64-linux support.
+  # Compile a standalone binary like upstream's build:binary script. Running
+  # dist/bun/cli.js directly with Bun breaks extension module aliasing (#6794).
+  preInstall = ''
+    # Upstream embeds the worker as ./src/utils/image-resize-worker.ts and
+    # loads it by that path at runtime; the npm tarball only ships dist/.
+    mkdir -p src/utils src/modes src/core
+    echo 'import "../../dist/utils/image-resize-worker.js";' > src/utils/image-resize-worker.ts
+    ln -s ../../dist/modes/interactive src/modes/interactive
+    ln -s ../../dist/core/export-html src/core/export-html
+
+    bun build --compile ./dist/bun/cli.js ./src/utils/image-resize-worker.ts --outfile dist/pi
+  '';
+
+
   postInstall = ''
-    rm -f "$out/bin/pi"
+    pkgdir=$out/libexec/pi
 
-    makeWrapper ${lib.getExe bun} "$out/bin/pi" \
-      --add-flags "${packageRoot}/dist/bun/cli.js" \
+    # The binary embeds all modules; assemble the release layout that
+    # upstream's scripts/build-binaries.sh ships.
+    rm -rf "$out/lib" "$out/bin"
+    mkdir -p "$out/bin" "$pkgdir/theme" "$pkgdir/assets"
+    cp dist/pi "$pkgdir/"
+    cp package.json README.md CHANGELOG.md "$pkgdir/"
+    cp node_modules/@silvia-odwyer/photon-node/photon_rs_bg.wasm "$pkgdir/"
+    cp dist/modes/interactive/theme/*.json "$pkgdir/theme/"
+    cp dist/modes/interactive/assets/* "$pkgdir/assets/"
+    cp -r dist/core/export-html "$pkgdir/"
+    cp -r docs examples "$pkgdir/"
+    # Keep patchShebangs from pulling Node into the closure via shipped scripts.
+    find "$pkgdir" -name '*.js' -exec chmod -x {} +
+
+    makeWrapper "$pkgdir/pi" "$out/bin/pi" \
       --prefix PATH : ${
         lib.makeBinPath [
           fd
           ripgrep
         ]
       } \
-      --set PI_PACKAGE_DIR ${packageRoot} \
+      --set PI_PACKAGE_DIR "$pkgdir" \
       --set PI_SKIP_VERSION_CHECK 1 \
       --set PI_TELEMETRY 0
   '';
 
-  # The npm install hook patches shebangs to Node; point them at Bun instead.
-  postFixup = ''
-    grep -rlE '^#!.*/node$' "$out/lib" | xargs -r sed -i '1s|.*|#!${lib.getExe bun}|'
-  '';
 
   doInstallCheck = true;
   nativeInstallCheckInputs = [

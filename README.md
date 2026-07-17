@@ -12,7 +12,7 @@
 | [ghostel](https://github.com/dakra/ghostel) | 0.44.0 | 0.44.0 | Up to date | Auto |
 | [evil-ghostel](https://github.com/dakra/ghostel) | 0.44.0 | 0.44.0 | Up to date | Auto |
 | [pi-acp](https://github.com/svkozak/pi-acp) | 0.0.31 | 0.0.31 | Up to date | Auto |
-| [pi-coding-agent](https://pi.dev/) | 0.80.7 | 0.80.7 | Up to date | Auto |
+| [pi-coding-agent](https://pi.dev/) | 0.80.10 | 0.80.10 | Up to date | Auto |
 | [pptxgenjs](https://gitbrent.github.io/PptxGenJS/) | 4.0.1 | 4.0.1 | Up to date | Auto |
 | [qterm](https://github.com/qterm/qterm) | 0.8.2 | 0.8.2 | Up to date | Auto |
 | [roon-server](https://roonlabs.com) | 2.70.1671 | 2.70.1671 | Up to date | Auto |
