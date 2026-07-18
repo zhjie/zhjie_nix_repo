@@ -51,6 +51,7 @@ PACKAGES=(
   "docx|docx|docx|npm|docx|Auto"
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "evil-ghostel|evil-ghostel|evil-ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
+  "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
   "pi-coding-agent|pi-coding-agent|pi-coding-agent|npm|@earendil-works/pi-coding-agent|Auto"
@@ -357,6 +358,7 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.ghostel" \
     "$ROOT#packages.${SYSTEM}.evil-ghostel" \
+    "$ROOT#packages.${SYSTEM}.leanclient" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
     "$ROOT#packages.${SYSTEM}.pi-coding-agent" \

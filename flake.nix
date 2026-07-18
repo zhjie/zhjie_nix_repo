@@ -35,7 +35,8 @@
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
           evil-ghostel = pkgs.emacsPackages.callPackage ./pkgs/evil-ghostel { inherit ghostel; };
           docx = pkgs.callPackage ./pkgs/docx { };
-          lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { };
+          leanclient = pkgs.callPackage ./pkgs/leanclient { };
+          lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient; };
           pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
           pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };

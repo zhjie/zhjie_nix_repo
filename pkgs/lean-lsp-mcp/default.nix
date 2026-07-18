@@ -2,19 +2,10 @@
   lib,
   python3Packages,
   fetchFromGitHub,
+  leanclient,
 }:
-
 let
   hashes = lib.importJSON ./hashes.json;
-  leanclient = python3Packages.leanclient.overridePythonAttrs (_: {
-    version = "0.12.0";
-    src = fetchFromGitHub {
-      owner = "oOo0oOo";
-      repo = "leanclient";
-      tag = "v0.12.0";
-      hash = "sha256-h90AMErcwdmHfIBgFerFEaUwjfRkJMl1iesXjtEpdlA=";
-    };
-  });
 in
 python3Packages.buildPythonApplication (finalAttrs: {
   pname = "lean-lsp-mcp";
