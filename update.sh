@@ -47,14 +47,11 @@ PACKAGES=(
   "emacs-plus|emacs-plus|emacs-plus|patches||Auto"
   "emacs-plus-31|emacs-plus-31|emacs-plus-31|patches||Auto"
   "claude-code-ide|claude-code-ide|claude-code-ide|el-head|manzaltu/claude-code-ide.el/claude-code-ide.el|Auto"
-  "codex-ide|codex-ide|codex-ide|el-head|dgillis/emacs-codex-ide/codex-ide.el|Auto"
   "docx|docx|docx|npm|docx|Auto"
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
-  "evil-ghostel|evil-ghostel|evil-ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
-  "pi-coding-agent|pi-coding-agent|pi-coding-agent|npm|@earendil-works/pi-coding-agent|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
@@ -354,14 +351,11 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.emacs-plus" \
     "$ROOT#packages.${SYSTEM}.emacs-plus-31" \
     "$ROOT#packages.${SYSTEM}.claude-code-ide" \
-    "$ROOT#packages.${SYSTEM}.codex-ide" \
     "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.ghostel" \
-    "$ROOT#packages.${SYSTEM}.evil-ghostel" \
     "$ROOT#packages.${SYSTEM}.leanclient" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
-    "$ROOT#packages.${SYSTEM}.pi-coding-agent" \
     "$ROOT#packages.${SYSTEM}.pptxgenjs" \
     "$ROOT#packages.${SYSTEM}.arrow-cpp"
 
