@@ -55,7 +55,6 @@ PACKAGES=(
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
-  "arrow-cpp|arrow-cpp|arrow-cpp|nixpkgs||Auto"
   "emacs-client|emacs-client|emacs-client|manual|1.0|Manual"
 )
 
@@ -356,8 +355,7 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.leanclient" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
-    "$ROOT#packages.${SYSTEM}.pptxgenjs" \
-    "$ROOT#packages.${SYSTEM}.arrow-cpp"
+    "$ROOT#packages.${SYSTEM}.pptxgenjs"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then
     nix build --dry-run \

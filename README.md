@@ -15,5 +15,4 @@
 | [pptxgenjs](https://gitbrent.github.io/PptxGenJS/) | 4.0.1 | 4.0.1 | Up to date | Auto |
 | [qterm](https://github.com/qterm/qterm) | 0.8.2 | 0.8.2 | Up to date | Auto |
 | [roon-server](https://roonlabs.com) | 2.71.1680 | 2.71.1680 | Up to date | Auto |
-| [arrow-cpp](https://arrow.apache.org/docs/cpp/) | 23.0.0 | Nixpkgs | Up to date | Auto |
 | [emacs-client](https://github.com/d12frosted/homebrew-emacs-plus) | 1.0 | Manual | Manual | Manual |
