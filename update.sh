@@ -46,7 +46,6 @@ fi
 PACKAGES=(
   "emacs-plus|emacs-plus|emacs-plus|patches||Auto"
   "emacs-plus-31|emacs-plus-31|emacs-plus-31|patches||Auto"
-  "claude-code-ide|claude-code-ide|claude-code-ide|el-head|manzaltu/claude-code-ide.el/claude-code-ide.el|Auto"
   "docx|docx|docx|npm|docx|Auto"
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
@@ -349,7 +348,6 @@ verify_flake() {
   nix build --dry-run \
     "$ROOT#packages.${SYSTEM}.emacs-plus" \
     "$ROOT#packages.${SYSTEM}.emacs-plus-31" \
-    "$ROOT#packages.${SYSTEM}.claude-code-ide" \
     "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.ghostel" \
     "$ROOT#packages.${SYSTEM}.leanclient" \
