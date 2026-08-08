@@ -31,15 +31,11 @@
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
           emacs-plus-31 = pkgs.callPackage ./pkgs/emacs-plus-31 { };
           emacs-client = pkgs.callPackage ./pkgs/emacs-client { };
-          claude-code-ide = pkgs.emacsPackages.callPackage ./pkgs/claude-code-ide { };
-          codex-ide = pkgs.emacsPackages.callPackage ./pkgs/codex-ide { };
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
-          evil-ghostel = pkgs.emacsPackages.callPackage ./pkgs/evil-ghostel { inherit ghostel; };
           docx = pkgs.callPackage ./pkgs/docx { };
           leanclient = pkgs.callPackage ./pkgs/leanclient { };
           lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient; };
           pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
-          pi-coding-agent = pkgs.callPackage ./pkgs/pi-coding-agent { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
         }
         // (
