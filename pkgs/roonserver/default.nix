@@ -1,7 +1,7 @@
 {
   autoPatchelfHook,
   fetchurl,
-  icu66,
+  icu,
   lib,
   makeWrapper,
   openssl,
@@ -26,6 +26,8 @@ stdenv.mkDerivation {
 
   buildInputs = [
     (lib.getLib stdenv.cc.cc)
+    icu
+    openssl
   ];
 
   nativeBuildInputs = [
@@ -43,26 +45,17 @@ stdenv.mkDerivation {
         (
           binDir="$(dirname "${binPath}")"
           binName="$(basename "${binPath}")"
-          dotnetDir="$out/RoonDotnet"
 
-          ln -sf "$dotnetDir/dotnet" "$dotnetDir/$binName"
-          rm "${binPath}"
-          makeWrapper "$dotnetDir/$binName" "${binPath}" \
-            --add-flags "$binDir/$binName.dll" \
+          rm -f "${binPath}"
+          makeWrapper "$binDir/$binName.exe" "${binPath}" \
             --argv0 "$binName" \
             --prefix LD_LIBRARY_PATH : "${
               lib.makeLibraryPath [
-                icu66
+                icu
                 openssl
               ]
             }" \
-            --prefix PATH : "$dotnetDir" \
-            --prefix PATH : "${
-              lib.makeBinPath [
-              ]
-            }" \
-            --chdir "$binDir" \
-            --set DOTNET_ROOT "$dotnetDir"
+            --chdir "$binDir"
         )
       '';
     in
@@ -72,19 +65,19 @@ stdenv.mkDerivation {
       mkdir -p $out
       mv * $out
 
-      rm $out/Appliance/roon_smb_watcher
-      rm $out/*/*.otf
-      rm $out/*/*.ttf
+      rm -f $out/Appliance/roon_smb_watcher
+      rm -f $out/*/*.otf
+      rm -f $out/*/*.ttf
       rm -rf $out/Appliance/webroot
-      rm $out/Appliance/libharfbuzz.so
-      rm $out/Appliance/check_alsa
-      rm $out/Server/libcoreclrtraceptprovider.so
-      rm $out/Appliance/libcoreclrtraceptprovider.so
+      rm -f $out/Appliance/libharfbuzz.so
+      rm -f $out/Appliance/check_alsa
+      rm -f $out/Server/libcoreclrtraceptprovider.so
+      rm -f $out/Appliance/libcoreclrtraceptprovider.so
 
-      rm $out/check-common.sh
-      rm $out/check.sh
-      rm $out/start.sh
-      rm $out/VERSION
+      rm -f $out/check-common.sh
+      rm -f $out/check.sh
+      rm -f $out/start.sh
+      rm -f $out/VERSION
 
       ${wrapBin "$out/Appliance/RoonAppliance"}
       ${wrapBin "$out/Server/RoonServer"}
