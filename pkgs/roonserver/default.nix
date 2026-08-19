@@ -86,7 +86,6 @@ stdenv.mkDerivation {
       rm $out/start.sh
       rm $out/VERSION
 
-      ${wrapBin "$out/Appliance/RAATServer"}
       ${wrapBin "$out/Appliance/RoonAppliance"}
       ${wrapBin "$out/Server/RoonServer"}
 
