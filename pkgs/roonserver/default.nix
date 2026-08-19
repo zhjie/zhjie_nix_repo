@@ -78,8 +78,10 @@ stdenv.mkDerivation {
       rm -rf $out/Appliance/webroot
       rm $out/Appliance/libharfbuzz.so
       rm $out/Appliance/check_alsa
-      rm $out/RoonDotnet/shared/Microsoft.NETCore.App/*/libcoreclrtraceptprovider.so
+      rm $out/Server/libcoreclrtraceptprovider.so
+      rm $out/Appliance/libcoreclrtraceptprovider.so
 
+      rm $out/check-common.sh
       rm $out/check.sh
       rm $out/start.sh
       rm $out/VERSION
