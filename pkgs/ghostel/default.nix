@@ -64,7 +64,7 @@ melpaBuild {
   inherit pname version src;
 
   files = ''
-    (:defaults "etc" "ghostel-module${libExt}")
+    (:defaults "etc" "ghostel-module${libExt}" "ghostel-module.version")
   '';
 
   preBuild = ''
@@ -73,7 +73,6 @@ melpaBuild {
   '';
 
   passthru = {
-    # updateScript = nix-update-script { extraArgs = [ "--version=branch=main" ]; };
     updateScript = nix-update-script { };
 
     inherit module;
