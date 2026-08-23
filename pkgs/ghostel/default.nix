@@ -4,9 +4,9 @@
   melpaBuild,
   nix-update-script,
   stdenv,
-  xcbuild,
   zig,
   emacs,
+  xcbuild,
 }:
 let
   hashes = lib.importJSON ./hashes.json;
@@ -38,10 +38,24 @@ let
 
     env.EMACS_INCLUDE_DIR = "${emacs}/include";
 
+    dontSetZigDefaultFlags = true;
+
+    doCheck = true;
+
+    zigBuildFlags = [
+      "-Dcpu=baseline"
+      # See https://github.com/ghostty-org/ghostty/blob/main/PACKAGING.md#build-options
+      "-Doptimize=ReleaseFast"
+    ];
+
     postConfigure = ''
       cp -rLT ${deps} "$ZIG_GLOBAL_CACHE_DIR/p"
       chmod -R u+w "$ZIG_GLOBAL_CACHE_DIR/p"
     '';
+
+    strictDeps = true;
+
+    __structuredAttrs = true;
   };
 
   libExt = stdenv.hostPlatform.extensions.sharedLibrary;
@@ -55,10 +69,13 @@ melpaBuild {
 
   preBuild = ''
     install ${module}/ghostel-module${libExt} ghostel-module${libExt}
+    install --mode=444 ${module}/ghostel-module.version ghostel-module.version
   '';
 
   passthru = {
-    updateScript = nix-update-script { extraArgs = [ "--version=branch=main" ]; };
+    # updateScript = nix-update-script { extraArgs = [ "--version=branch=main" ]; };
+    updateScript = nix-update-script { };
+
     inherit module;
   };
 
