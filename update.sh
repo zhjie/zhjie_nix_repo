@@ -52,6 +52,7 @@ PACKAGES=(
   "mcp|mcp|mcp|git-tag-v|https://github.com/modelcontextprotocol/python-sdk.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
+  "antigravity-acp|antigravity-acp|antigravity-acp|acp-registry|https://raw.githubusercontent.com/agentclientprotocol/registry/main/antigravity-acp/agent.json|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
@@ -156,6 +157,13 @@ latest_roon() {
   fi
 }
 
+latest_acp_registry() {
+  local url="$1"
+  curl -fsSL "$url" \
+    | jq -r '.distribution.binary."darwin-aarch64".archive' \
+    | sed -nE 's/.*agy_acp_server_([0-9A-Za-z_]+)-.*/\1/p'
+}
+
 check_package() {
   local row="$1"
   local name dir attr checker arg maintenance
@@ -207,6 +215,12 @@ check_package() {
       ;;
     roon)
       if upstream_version="$(latest_roon 2>/dev/null)"; then
+        status="Update available"
+        [ "$local_version" = "$upstream_version" ] && status="Up to date"
+      fi
+      ;;
+    acp-registry)
+      if upstream_version="$(latest_acp_registry "$arg" 2>/dev/null)"; then
         status="Update available"
         [ "$local_version" = "$upstream_version" ] && status="Up to date"
       fi
@@ -355,6 +369,7 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.mcp" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
+    "$ROOT#packages.${SYSTEM}.antigravity-acp" \
     "$ROOT#packages.${SYSTEM}.pptxgenjs"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then

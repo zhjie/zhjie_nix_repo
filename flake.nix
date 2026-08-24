@@ -22,6 +22,7 @@
             pkg:
             builtins.elem (nixpkgs.lib.getName pkg) [
               "roon-server"
+              "antigravity-acp"
             ];
         };
       in
@@ -37,6 +38,7 @@
           mcp = pkgs.callPackage ./pkgs/mcp { };
           lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
           pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
+          antigravity-acp = pkgs.callPackage ./pkgs/antigravity-acp { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
         }
         // (

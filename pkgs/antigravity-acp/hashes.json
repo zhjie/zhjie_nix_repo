@@ -1,0 +1,17 @@
+{
+  "version": "20260818_01_RC01",
+  "sources": {
+    "aarch64-darwin": {
+      "url": "https://dl.google.com/agy-extensions/releases/macos/agy-acp-server-agy_acp_server_20260818_01_RC01-darwin-arm64.zip",
+      "hash": "sha256-8SLKfnAwon+WSdpM8afYDhLEjF9hGP81r/w01Wy/g90="
+    },
+    "x86_64-linux": {
+      "url": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-agy_acp_server_20260818_01_RC01-linux-x86_64.zip",
+      "hash": "sha256-zj8JYoV1slSXz1o8GdBztJrLgPHasf+FkpGenJuHmeE="
+    },
+    "aarch64-linux": {
+      "url": "https://dl.google.com/agy-extensions/releases/linux/agy-acp-server-agy_acp_server_20260818_01_RC01-linux-arm64.zip",
+      "hash": "sha256-cPzaxwaE3mD3oOsW6kl9bMRJhyhCDwYOCFDPyakym0A="
+    }
+  }
+}
