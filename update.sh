@@ -49,6 +49,7 @@ PACKAGES=(
   "docx|docx|docx|npm|docx|Auto"
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
+  "mcp|mcp|mcp|git-tag-v|https://github.com/modelcontextprotocol/python-sdk.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
@@ -109,7 +110,7 @@ latest_git_tag() {
   local url="$1"
   local prefix="$2"
   git ls-remote --tags --refs "$url" "refs/tags/${prefix}*" \
-    | sed -nE "s#^([^[:space:]]+)[[:space:]]+refs/tags/${prefix}([0-9].*)#\1\t\2#p" \
+    | sed -nE "s#^([^[:space:]]+)[[:space:]]+refs/tags/${prefix}([0-9]+(\.[0-9]+)*)\$#\1\t\2#p" \
     | sort -t$'\t' -k2,2V \
     | tail -n1
 }
@@ -351,6 +352,7 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.ghostel" \
     "$ROOT#packages.${SYSTEM}.leanclient" \
+    "$ROOT#packages.${SYSTEM}.mcp" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
     "$ROOT#packages.${SYSTEM}.pptxgenjs"

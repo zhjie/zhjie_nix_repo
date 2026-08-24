@@ -3,6 +3,7 @@
   python3Packages,
   fetchFromGitHub,
   leanclient,
+  mcp ? python3Packages.mcp,
 }:
 let
   hashes = lib.importJSON ./hashes.json;
@@ -30,7 +31,7 @@ python3Packages.buildPythonApplication (finalAttrs: {
 
   dependencies = [
     leanclient
-    python3Packages.mcp
+    mcp
     python3Packages.orjson
     python3Packages.certifi
   ];

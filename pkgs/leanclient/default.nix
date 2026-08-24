@@ -25,6 +25,7 @@ python3Packages.buildPythonPackage (finalAttrs: {
     orjson
     psutil
     tqdm
+    watchfiles
   ];
 
   # Tests require a real Lean toolchain.
