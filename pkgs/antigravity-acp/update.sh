@@ -29,6 +29,11 @@ fi
 CURRENT="$(jq -r '.version' "$HASHES_FILE" 2>/dev/null || echo "0.0.0")"
 printf 'Current: %s  Latest: %s\n' "$CURRENT" "$VERSION"
 
+if [ "$CURRENT" = "$VERSION" ] && [ "${1:-}" != "--force" ] && jq -e '.sources."aarch64-darwin".hash' "$HASHES_FILE" >/dev/null 2>&1; then
+  printf 'Already up to date.\n'
+  exit 0
+fi
+
 printf 'Fetching hashes...\n'
 printf '  aarch64-darwin...\n'
 HASH_DARWIN_ARM64="$(nix store prefetch-file --json "$URL_DARWIN_ARM64" | jq -r '.hash')"
