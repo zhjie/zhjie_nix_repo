@@ -1,7 +1,7 @@
 {
-  "version": "31.0.90-unstable-2026-08-23",
-  "rev": "f60d4243e63f7825396b5d3116f87e9073342fd1",
-  "sourceHash": "sha256-OzNx2IajlsqDt1N8TqUII/0+atYd7bCQvQW0HnLQzA8=",
+  "version": "31.0.90-unstable-2026-08-26",
+  "rev": "6fc331b5871362572d85abe23c1d6080eae8181d",
+  "sourceHash": "sha256-/uljt1JyBUeUZB+KY/SWrhH3e7A3dZcAS1/t1YMQoWo=",
   "patches": {
     "mac-font-use-typo-metrics": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/ca58660ccbf7cc4ff9e6e821c3d13509e62ac03d/community/patches/mac-font-use-typo-metrics/emacs-31.patch",
