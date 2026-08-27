@@ -2,28 +2,28 @@
   lib,
   pkgs,
   fetchurl,
-  fetchgit,
+  fetchFromGitHub,
   fetchpatch,
 }:
 
 let
   hashes = lib.importJSON ./hashes.json;
-  inherit (hashes) version rev;
+  inherit (hashes) version;
   emacs31 = pkgs.callPackage (
     import "${pkgs.path}/pkgs/applications/editors/emacs/make-emacs.nix" {
       pname = "emacs";
       inherit version;
       variant = "mainline";
-      src = fetchgit {
-        url = "https://github.com/emacs-mirror/emacs.git";
-        inherit rev;
-        branchName = "emacs-31";
+      src = fetchFromGitHub {
+        owner = "emacs-mirror";
+        repo = "emacs";
+        tag = "emacs-${version}";
         hash = hashes.sourceHash;
       };
       meta = {
         homepage = "https://www.gnu.org/software/emacs/";
         description = "Extensible, customizable GNU text editor";
-        changelog = "https://cgit.git.savannah.gnu.org/cgit/emacs.git/plain/etc/NEWS?h=${rev}";
+        changelog = "https://cgit.git.savannah.gnu.org/cgit/emacs.git/plain/etc/NEWS?h=emacs-${version}";
         license = lib.licenses.gpl3Plus;
         platforms = lib.platforms.all;
         mainProgram = "emacs";
@@ -41,7 +41,7 @@ emacs31.overrideAttrs (oldAttrs: {
   NIX_CFLAGS_COMPILE =
     (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT";
 
-  # 1. Apply all patches defined in hashes.json after nixpkgs' Emacs patches.
+  # 1. Apply all patches defined in hashes.json
   patches =
     (oldAttrs.patches or [ ])
     ++ (map (
