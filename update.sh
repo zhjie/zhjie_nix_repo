@@ -45,7 +45,6 @@ fi
 # name | package directory | flake attribute | upstream checker | checker argument | maintenance
 PACKAGES=(
   "emacs-plus|emacs-plus|emacs-plus|patches||Auto"
-  "emacs-plus-31|emacs-plus-31|emacs-plus-31|patches||Auto"
   "docx|docx|docx|npm|docx|Auto"
   "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
@@ -362,7 +361,6 @@ verify_flake() {
   printf '\n==> Verifying dry-run builds on %s\n' "$SYSTEM"
   nix build --dry-run \
     "$ROOT#packages.${SYSTEM}.emacs-plus" \
-    "$ROOT#packages.${SYSTEM}.emacs-plus-31" \
     "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.ghostel" \
     "$ROOT#packages.${SYSTEM}.leanclient" \

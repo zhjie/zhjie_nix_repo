@@ -30,7 +30,6 @@
         packages = rec {
           arrow-cpp = pkgs.callPackage ./pkgs/arrow-cpp { };
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
-          emacs-plus-31 = pkgs.callPackage ./pkgs/emacs-plus-31 { };
           emacs-client = pkgs.callPackage ./pkgs/emacs-client { };
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
           docx = pkgs.callPackage ./pkgs/docx { };

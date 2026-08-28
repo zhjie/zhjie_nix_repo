@@ -7,14 +7,13 @@ set -euo pipefail
 SCRIPT_DIR="$(cd -- "$(dirname -- "$0")" && pwd)"
 HASHES_FILE="$SCRIPT_DIR/hashes.json"
 
-EMACS_VERSION="30"
+EMACS_VERSION="31"
 PATCHES=(
   "mac-font-use-typo-metrics"
   "aggressive-read-buffering"
-  "fix-window-role"
+  "fix-ns-scroll-crash"
   "system-appearance"
   "round-undecorated-frame"
-  "fix-macos-tahoe-scrolling"
   "fix-ns-x-colors"
 )
 

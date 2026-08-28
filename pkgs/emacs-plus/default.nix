@@ -2,13 +2,13 @@
   lib,
   fetchurl,
   fetchpatch,
-  emacs30,
+  emacs31,
 }:
 
 let
   hashes = lib.importJSON ./hashes.json;
 in
-emacs30.overrideAttrs (oldAttrs: {
+emacs31.overrideAttrs (oldAttrs: {
   pname = "emacs-plus";
 
   # Inject macOS file descriptor optimizations (prevents "too many open files" errors in LSP/Doom Emacs)
@@ -53,7 +53,7 @@ emacs30.overrideAttrs (oldAttrs: {
   '';
 
   meta = oldAttrs.meta // {
-    description = "GNU Emacs 30 with patches from emacs-plus (including mac-font-use-typo-metrics and aggressive-read-buffering)";
+    description = "GNU Emacs 31 with patches from emacs-plus (including mac-font-use-typo-metrics and aggressive-read-buffering)";
     homepage = "https://github.com/d12frosted/homebrew-emacs-plus";
   };
 })

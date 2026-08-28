@@ -5,7 +5,6 @@
 | Package | Local | Upstream | Status/Action | Maintenance |
 | :--- | :--- | :--- | :--- | :--- |
 | [emacs-plus](https://github.com/d12frosted/homebrew-emacs-plus) | Patch hashes | Patch sources | Refresh hashes | Auto |
-| [emacs-plus-31](https://github.com/d12frosted/homebrew-emacs-plus) | 31.0.90-unstable-2026-08-26 | Patch sources | Refresh hashes | Auto |
 | [docx](https://github.com/dolanmiu/docx) | 9.7.1 | 9.7.1 | Up to date | Auto |
 | [ghostel](https://github.com/dakra/ghostel) | 0.51.0 | 0.51.0 | Up to date | Auto |
 | [leanclient](https://github.com/oOo0oOo/leanclient) | 0.13.2 | 0.13.2 | Up to date | Auto |
