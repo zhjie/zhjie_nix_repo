@@ -28,7 +28,6 @@
       in
       {
         packages = rec {
-          arrow-cpp = pkgs.callPackage ./pkgs/arrow-cpp { };
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
           emacs-client = pkgs.callPackage ./pkgs/emacs-client { };
           ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
