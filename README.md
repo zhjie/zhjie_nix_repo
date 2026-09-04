@@ -11,7 +11,7 @@
 | [mcp](https://github.com/modelcontextprotocol/python-sdk) | 2.1.1 | 2.1.1 | Up to date | Auto |
 | [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | 0.30.0 | 0.30.0 | Up to date | Auto |
 | [pi-acp](https://github.com/svkozak/pi-acp) | 0.0.33 | 0.0.33 | Up to date | Auto |
-| [antigravity-acp](https://antigravity.google/docs/ide/extensions) | 20260818_01_RC01 | 20260818_01_RC01 | Up to date | Auto |
+| [antigravity-acp](https://antigravity.google/docs/ide/extensions) | 1.1.1 |  | Update available | Auto |
 | [pptxgenjs](https://gitbrent.github.io/PptxGenJS/) | 4.0.1 | 4.0.1 | Up to date | Auto |
 | [qterm](https://github.com/qterm/qterm) | 0.8.2 | 0.8.2 | Up to date | Auto |
 | [roon-server](https://roonlabs.com) | 2.71.1683 | 2.71.1683 | Up to date | Auto |
