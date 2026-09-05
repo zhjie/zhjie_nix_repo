@@ -38,9 +38,6 @@ stdenv.mkDerivation {
     unzip -q $src -d $out/libexec/antigravity-acp
     chmod +x $out/libexec/antigravity-acp/*
 
-    makeWrapper $out/libexec/antigravity-acp/agy_acp_server.par $out/bin/antigravity-acp \
-      --prefix PATH : "$out/libexec/antigravity-acp"
-
     makeWrapper $out/libexec/antigravity-acp/agy_acp_server.par $out/bin/agy_acp_server.par \
       --prefix PATH : "$out/libexec/antigravity-acp"
 
