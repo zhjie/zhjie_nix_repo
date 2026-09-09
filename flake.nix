@@ -44,6 +44,7 @@
             {
               qterm = pkgs.callPackage ./pkgs/qterm { };
               roon-server = pkgs.callPackage ./pkgs/roonserver { };
+              gnomeExtensions.keyd = pkgs.callPackage ./pkgs/gnome-shell-extension-keyd { };
             }
           else
             { }
