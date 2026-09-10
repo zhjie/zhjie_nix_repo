@@ -8,7 +8,7 @@
 | [docx](https://github.com/dolanmiu/docx) | 9.7.1 | 9.7.1 | Up to date | Auto |
 | [ghostel](https://github.com/dakra/ghostel) | 0.53.0 | 0.53.0 | Up to date | Auto |
 | [leanclient](https://github.com/oOo0oOo/leanclient) | 0.13.2 | 0.13.2 | Up to date | Auto |
-| [mcp](https://github.com/modelcontextprotocol/python-sdk) | 2.1.1 | 2.1.1 | Up to date | Auto |
+| [mcp](https://github.com/modelcontextprotocol/python-sdk) | 2.2.0 | 2.2.0 | Up to date | Auto |
 | [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | 0.30.0 | 0.30.0 | Up to date | Auto |
 | [pi-acp](https://github.com/svkozak/pi-acp) | 0.0.33 | 0.0.33 | Up to date | Auto |
 | [antigravity-acp](https://antigravity.google/docs/ide/extensions) | 1.1.1 |  | Update available | Auto |
