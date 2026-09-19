@@ -1,6 +1,6 @@
 {
-  "version": "0.53.0",
-  "rev": "2bea18f3b52bf97d8222fea706da6fabdfc2cbb8",
-  "sourceHash": "sha256-ZzRf/3QoG499S2bJhA+wnphqX0KDiY+Pe7yENKh8AV4=",
-  "zigDepsHash": "sha256-NcNp0FnMy6FfZ63+pwiTRCmJ8FIovJEOhNvxVr1+uSQ="
+  "version": "0.55.0",
+  "rev": "755c61a4bffa3d461d4c36d69c9f95cc9e31ea95",
+  "sourceHash": "sha256-ZXBpHfKeBQohjIGcFq0uF34DxxzXmWOuXHvChnXnuhg=",
+  "zigDepsHash": "sha256-87q0nSOkZaIHW8Ztgf5pR13sHNw7eQKJhu12QjRMTvA="
 }
