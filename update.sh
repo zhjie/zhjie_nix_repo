@@ -51,7 +51,6 @@ PACKAGES=(
   "mcp|mcp|mcp|git-tag-v|https://github.com/modelcontextprotocol/python-sdk.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
-  "antigravity-acp|antigravity-acp|antigravity-acp|acp-registry|https://raw.githubusercontent.com/agentclientprotocol/registry/main/antigravity-acp/agent.json|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
