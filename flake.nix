@@ -36,6 +36,7 @@
           lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
           pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
+          zerotierone = pkgs.callPackage ./pkgs/zerotierone { };
         }
         // (
           if system == "x86_64-linux" then
