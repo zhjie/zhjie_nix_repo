@@ -45,16 +45,16 @@ fi
 # name | package directory | flake attribute | upstream checker | checker argument | maintenance
 PACKAGES=(
   "emacs-plus|emacs-plus|emacs-plus|patches||Auto"
-  "docx|docx|docx|npm|docx|Auto"
-  "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
   "mcp|mcp|mcp|git-tag-v|https://github.com/modelcontextprotocol/python-sdk.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
   "pi-acp|pi-acp|pi-acp|npm|pi-acp|Auto"
+  "docx|docx|docx|npm|docx|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
   "emacs-client|emacs-client|emacs-client|manual|1.0|Manual"
+  "ghostel|ghostel|ghostel|git-tag-v|https://github.com/dakra/ghostel.git|Auto"
 )
 
 RESULT_PACKAGES=()
@@ -366,7 +366,6 @@ verify_flake() {
     "$ROOT#packages.${SYSTEM}.mcp" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
     "$ROOT#packages.${SYSTEM}.pi-acp" \
-    "$ROOT#packages.${SYSTEM}.antigravity-acp" \
     "$ROOT#packages.${SYSTEM}.pptxgenjs"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then
