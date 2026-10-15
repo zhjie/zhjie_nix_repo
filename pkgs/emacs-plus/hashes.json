@@ -1,13 +1,5 @@
 {
   "patches": {
-    "mac-font-use-typo-metrics": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/8da4d9bee657e392aab493b0281b91edd9d9196e/community/patches/mac-font-use-typo-metrics/emacs-31.patch",
-      "hash": "sha256-ZTCy7UMn6G27dVTwMoXtdfV9cCs+gxcOS/78A13dL/o="
-    },
-    "aggressive-read-buffering": {
-      "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/8da4d9bee657e392aab493b0281b91edd9d9196e/community/patches/aggressive-read-buffering/emacs-31.patch",
-      "hash": "sha256-4w8/310XDuLROZfiwxfnqmBWZtinIT3EomcKLh8d58A="
-    },
     "fix-ns-scroll-crash": {
       "url": "https://raw.githubusercontent.com/d12frosted/homebrew-emacs-plus/8da4d9bee657e392aab493b0281b91edd9d9196e/patches/emacs-31/fix-ns-scroll-crash.patch",
       "hash": "sha256-syC9un5Vy1+bmBWIc+TEwTCM/nfPIxd4IhWYdEfP4qE="

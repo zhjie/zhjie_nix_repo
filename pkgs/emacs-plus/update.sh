@@ -9,8 +9,6 @@ HASHES_FILE="$SCRIPT_DIR/hashes.json"
 
 EMACS_VERSION="31"
 PATCHES=(
-  "mac-font-use-typo-metrics"
-  "aggressive-read-buffering"
   "fix-ns-scroll-crash"
   "system-appearance"
   "round-undecorated-frame"
