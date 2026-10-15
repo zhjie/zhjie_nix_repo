@@ -3,17 +3,32 @@
   fetchurl,
   fetchpatch,
   emacs31,
+  lcms2,
 }:
 
 let
   hashes = lib.importJSON ./hashes.json;
+
+  # Match emacs-plus@31 defaults (homebrew formula): it passes
+  # --without-compress-install, and xwidgets / mailutils are opt-in there.
+  base = emacs31.override {
+    withCompressInstall = false;
+    withXwidgets = false;
+    withMailutils = false;
+  };
 in
-emacs31.overrideAttrs (oldAttrs: {
+base.overrideAttrs (oldAttrs: {
   pname = "emacs-plus";
 
+  # emacs-plus depends on little-cms2; Emacs 31 enables --with-lcms2 by default when found
+  buildInputs = (oldAttrs.buildInputs or [ ]) ++ [ lcms2 ];
+
   # Inject macOS file descriptor optimizations (prevents "too many open files" errors in LSP/Doom Emacs)
-  NIX_CFLAGS_COMPILE =
-    (oldAttrs.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT";
+  # Must go through `env`: nixpkgs' emacs uses __structuredAttrs.
+  env = (oldAttrs.env or { }) // {
+    NIX_CFLAGS_COMPILE =
+      (oldAttrs.env.NIX_CFLAGS_COMPILE or "") + " -DFD_SETSIZE=10000 -DDARWIN_UNLIMITED_SELECT";
+  };
 
   # 1. Apply all patches defined in hashes.json
   patches =
@@ -53,7 +68,7 @@ emacs31.overrideAttrs (oldAttrs: {
   '';
 
   meta = oldAttrs.meta // {
-    description = "GNU Emacs 31 with patches from emacs-plus (including mac-font-use-typo-metrics and aggressive-read-buffering)";
+    description = "GNU Emacs 31 with patches from emacs-plus";
     homepage = "https://github.com/d12frosted/homebrew-emacs-plus";
   };
 })
