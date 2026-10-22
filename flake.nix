@@ -34,7 +34,6 @@
           leanclient = pkgs.callPackage ./pkgs/leanclient { };
           lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
           mcp = pkgs.callPackage ./pkgs/mcp { };
-          zerotierone = pkgs.callPackage ./pkgs/zerotierone { };
         }
         // (
           if system == "x86_64-linux" then
