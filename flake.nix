@@ -30,10 +30,10 @@
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
           emacs-client = pkgs.callPackage ./pkgs/emacs-client { };
           docx = pkgs.callPackage ./pkgs/docx { };
-          leanclient = pkgs.callPackage ./pkgs/leanclient { };
-          mcp = pkgs.callPackage ./pkgs/mcp { };
-          lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
+          leanclient = pkgs.callPackage ./pkgs/leanclient { };
+          lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
+          mcp = pkgs.callPackage ./pkgs/mcp { };
           zerotierone = pkgs.callPackage ./pkgs/zerotierone { };
         }
         // (
