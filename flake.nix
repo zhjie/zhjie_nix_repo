@@ -29,12 +29,10 @@
         packages = rec {
           emacs-plus = pkgs.callPackage ./pkgs/emacs-plus { };
           emacs-client = pkgs.callPackage ./pkgs/emacs-client { };
-          ghostel = pkgs.emacsPackages.callPackage ./pkgs/ghostel { };
           docx = pkgs.callPackage ./pkgs/docx { };
           leanclient = pkgs.callPackage ./pkgs/leanclient { };
           mcp = pkgs.callPackage ./pkgs/mcp { };
           lean-lsp-mcp = pkgs.callPackage ./pkgs/lean-lsp-mcp { inherit leanclient mcp; };
-          pi-acp = pkgs.callPackage ./pkgs/pi-acp { };
           pptxgenjs = pkgs.callPackage ./pkgs/pptxgenjs { };
           zerotierone = pkgs.callPackage ./pkgs/zerotierone { };
         }
