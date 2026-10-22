@@ -65,7 +65,7 @@ stdenv.mkDerivation {
       mkdir -p $out
       mv * $out
 
-      rm -f $out/Server/roon_smb_watcher
+      rm -f $out/*/roon_smb_watcher
       rm -f $out/Server/libcoreclrtraceptprovider.so
       rm -f $out/Appliance/libharfbuzz.so
       rm -f $out/Appliance/check_alsa
