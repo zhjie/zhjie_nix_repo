@@ -65,13 +65,10 @@ stdenv.mkDerivation {
       mkdir -p $out
       mv * $out
 
-      rm -f $out/Appliance/roon_smb_watcher
-      rm -f $out/*/*.otf
-      rm -f $out/*/*.ttf
-      rm -rf $out/Appliance/webroot
+      rm -f $out/Server/roon_smb_watcher
+      rm -f $out/Server/libcoreclrtraceptprovider.so
       rm -f $out/Appliance/libharfbuzz.so
       rm -f $out/Appliance/check_alsa
-      rm -f $out/Server/libcoreclrtraceptprovider.so
       rm -f $out/Appliance/libcoreclrtraceptprovider.so
 
       rm -f $out/check-common.sh
