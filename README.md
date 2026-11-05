@@ -11,5 +11,5 @@
 | [docx](https://github.com/dolanmiu/docx) | 9.15.2 | 9.15.2 | Up to date | Auto |
 | [pptxgenjs](https://gitbrent.github.io/PptxGenJS/) | 4.0.1 | 4.0.1 | Up to date | Auto |
 | [qterm](https://github.com/qterm/qterm) | 0.8.2 | 0.8.2 | Up to date | Auto |
-| [roon-server](https://roonlabs.com) | 2.74.1716 | 2.74.1716 | Up to date | Auto |
+| [roon-server](https://roonlabs.com) | 2.74.1719 | 2.74.1719 | Up to date | Auto |
 | [emacs-client](https://github.com/d12frosted/homebrew-emacs-plus) | 1.0 | Manual | Manual | Manual |
