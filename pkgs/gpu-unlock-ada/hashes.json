@@ -1,0 +1,11 @@
+{
+  "version": "1.1.1",
+  "sourceHash": "sha256-5Qf/oZMOqg9cohWTRSiGMiCgRlJeoYQWsnu9ZXBzRqI=",
+  "firmwareVersion": "610.43.03",
+  "nvidiaSourceUrl": "https://download.nvidia.com/XFree86/NVIDIA-kernel-module-source/NVIDIA-kernel-module-source-610.43.03.tar.xz",
+  "nvidiaSourceFilename": "NVIDIA-kernel-module-source-610.43.03.tar.xz",
+  "nvidiaSourceHash": "sha256-fhGJI8eiPtw2EU1jJzpG4+BOmvmGlaQiA+esLf6fwdw=",
+  "nvidiaUtilsUrl": "https://archive.cachyos.org/archive/cachyos-v3/nvidia-utils-610.43.03-1-x86_64_v3.pkg.tar.zst",
+  "nvidiaUtilsFilename": "nvidia-utils-610.43.03-1-x86_64_v3.pkg.tar.zst",
+  "nvidiaUtilsHash": "sha256-4X58ku7/oXiw/h9A6xekcJX4/Dzkp3vxFc9b1aTfhuk="
+}

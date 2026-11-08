@@ -22,6 +22,7 @@
             pkg:
             builtins.elem (nixpkgs.lib.getName pkg) [
               "roon-server"
+              "gpu-unlock-ada-firmware"
             ];
         };
       in
@@ -41,10 +42,18 @@
               qterm = pkgs.callPackage ./pkgs/qterm { };
               roon-server = pkgs.callPackage ./pkgs/roonserver { };
               gnomeExtensions.keyd = pkgs.callPackage ./pkgs/gnome-shell-extension-keyd { };
+              gpu-unlock-ada = pkgs.callPackage ./pkgs/gpu-unlock-ada { };
+              gpu-unlock-ada-firmware = (pkgs.callPackage ./pkgs/gpu-unlock-ada { }).firmware;
             }
           else
             { }
         );
       }
-    );
+    )
+    // {
+      nixosModules = {
+        gpu-unlock-ada = import ./modules/gpu-unlock-ada.nix;
+        default = self.nixosModules.gpu-unlock-ada;
+      };
+    };
 }

@@ -51,6 +51,7 @@ PACKAGES=(
   "docx|docx|docx|npm|docx|Auto"
   "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
+  "gpu-unlock-ada|gpu-unlock-ada|gpu-unlock-ada|git-tag-v|https://github.com/JustAResearcher/gpu-unlock-ada.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
   "emacs-client|emacs-client|emacs-client|manual|1.0|Manual"
 )
@@ -367,7 +368,8 @@ verify_flake() {
   if [ "$SYSTEM" = "x86_64-linux" ]; then
     nix build --dry-run \
       "$ROOT#packages.${SYSTEM}.qterm" \
-      "$ROOT#packages.${SYSTEM}.roon-server"
+      "$ROOT#packages.${SYSTEM}.roon-server" \
+      "$ROOT#packages.${SYSTEM}.gpu-unlock-ada"
   fi
 }
 
