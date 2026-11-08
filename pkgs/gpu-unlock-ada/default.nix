@@ -41,11 +41,17 @@ let
     ];
     dontConfigure = true;
 
+    postPatch = ''
+      substituteInPlace firmware/generate_v67.py \
+        --replace-fail 'PACKAGE_SHA256 = "e17e7c92eeffa178b0fe1f40eb17a47095f8fc3ce4a77bf115cf5bd5a4df86e9"' \
+                      'PACKAGE_SHA256 = "${hashes.nvidiaUtilsSha256}"'
+    '';
+
     buildPhase = ''
       runHook preBuild
       mkdir inputs
       ln -s ${nvidiaSource} inputs/${hashes.nvidiaSourceFilename}
-      ln -s ${nvidiaUtils} inputs/${hashes.nvidiaUtilsFilename}
+      ln -s ${nvidiaUtils} inputs/nvidia-utils-${firmwareVersion}-1-x86_64_v3.pkg.tar.zst
       make firmware INPUTS="$PWD/inputs" ASSETS="$PWD/assets"
       runHook postBuild
     '';
