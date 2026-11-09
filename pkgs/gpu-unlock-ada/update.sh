@@ -74,7 +74,6 @@ if ! curl -fsSL -I "$NVIDIA_UTILS_URL" >/dev/null 2>&1; then
     NVIDIA_UTILS_FILENAME="nvidia-utils-${FIRMWARE_VERSION}-1-x86_64.pkg.tar.zst"
     PREFETCH_UTILS="$(nix store prefetch-file --json "$NVIDIA_UTILS_URL")"
     NVIDIA_UTILS_HASH="$(printf '%s\n' "$PREFETCH_UTILS" | jq -r '.hash')"
-    NVIDIA_UTILS_HEX="$(nix hash convert --to base16 --hash-algo sha256 "$NVIDIA_UTILS_HASH")"
   else
     NVIDIA_UTILS_HASH="$(nix hash convert --to sri --hash-algo sha256 "$NVIDIA_UTILS_HEX")"
   fi
@@ -99,7 +98,6 @@ jq -n \
   --arg nvidiaSourceHash "$NVIDIA_SOURCE_HASH" \
   --arg nvidiaUtilsUrl "$NVIDIA_UTILS_URL" \
   --arg nvidiaUtilsFilename "$NVIDIA_UTILS_FILENAME" \
-  --arg nvidiaUtilsSha256 "$NVIDIA_UTILS_HEX" \
   --arg nvidiaUtilsHash "$NVIDIA_UTILS_HASH" \
   '{
     version: $version,
@@ -110,7 +108,6 @@ jq -n \
     nvidiaSourceHash: $nvidiaSourceHash,
     nvidiaUtilsUrl: $nvidiaUtilsUrl,
     nvidiaUtilsFilename: $nvidiaUtilsFilename,
-    nvidiaUtilsSha256: $nvidiaUtilsSha256,
     nvidiaUtilsHash: $nvidiaUtilsHash
   }' > "$HASHES_FILE"
 

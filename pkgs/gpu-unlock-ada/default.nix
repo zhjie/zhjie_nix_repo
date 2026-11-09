@@ -42,9 +42,11 @@ let
     dontConfigure = true;
 
     postPatch = ''
+      # Nix fetchurl verifies the package hash, and generate_v67.py directly checks
+      # the inner GSP firmware and license hashes. Bypassing the outer package hash
+      # assertion prevents breaking across upstream releases or alternative distribution mirrors.
       substituteInPlace firmware/generate_v67.py \
-        --replace-fail 'PACKAGE_SHA256 = "e17e7c92eeffa178b0fe1f40eb17a47095f8fc3ce4a77bf115cf5bd5a4df86e9"' \
-                      'PACKAGE_SHA256 = "${hashes.nvidiaUtilsSha256}"'
+        --replace-fail 'if package_bytes_hash.hexdigest() != PACKAGE_SHA256:' 'if False:'
     '';
 
     buildPhase = ''

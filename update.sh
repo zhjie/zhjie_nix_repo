@@ -48,8 +48,6 @@ PACKAGES=(
   "leanclient|leanclient|leanclient|git-tag-v|https://github.com/oOo0oOo/leanclient.git|Auto"
   "mcp|mcp|mcp|git-tag-v|https://github.com/modelcontextprotocol/python-sdk.git|Auto"
   "lean-lsp-mcp|lean-lsp-mcp|lean-lsp-mcp|git-tag-v|https://github.com/oOo0oOo/lean-lsp-mcp.git|Auto"
-  "docx|docx|docx|npm|docx|Auto"
-  "pptxgenjs|pptxgenjs|pptxgenjs|npm|pptxgenjs|Auto"
   "qterm|qterm|qterm|git-tag|https://github.com/qterm/qterm.git|Auto"
   "gpu-unlock-ada|gpu-unlock-ada|gpu-unlock-ada|git-tag-v|https://github.com/JustAResearcher/gpu-unlock-ada.git|Auto"
   "roon-server|roonserver|roon-server|roon||Auto"
@@ -359,11 +357,9 @@ verify_flake() {
   printf '\n==> Verifying dry-run builds on %s\n' "$SYSTEM"
   nix build --dry-run \
     "$ROOT#packages.${SYSTEM}.emacs-plus" \
-    "$ROOT#packages.${SYSTEM}.docx" \
     "$ROOT#packages.${SYSTEM}.leanclient" \
-    "$ROOT#packages.${SYSTEM}.mcp" \
     "$ROOT#packages.${SYSTEM}.lean-lsp-mcp" \
-    "$ROOT#packages.${SYSTEM}.pptxgenjs"
+    "$ROOT#packages.${SYSTEM}.mcp"
 
   if [ "$SYSTEM" = "x86_64-linux" ]; then
     nix build --dry-run \

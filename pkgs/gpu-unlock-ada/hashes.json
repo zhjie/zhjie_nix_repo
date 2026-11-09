@@ -7,6 +7,5 @@
   "nvidiaSourceHash": "sha256-fhGJI8eiPtw2EU1jJzpG4+BOmvmGlaQiA+esLf6fwdw=",
   "nvidiaUtilsUrl": "https://archive.archlinux.org/packages/n/nvidia-utils/nvidia-utils-610.43.03-1-x86_64.pkg.tar.zst",
   "nvidiaUtilsFilename": "nvidia-utils-610.43.03-1-x86_64.pkg.tar.zst",
-  "nvidiaUtilsSha256": "c3367ff68632ac7daf6ca50ef7cbdd1cb5d09f7fe0b26125b312c73e52a34cf4",
   "nvidiaUtilsHash": "sha256-wzZ/9oYyrH2vbKUO98vdHLXQn3/gsmElsxLHPlKjTPQ="
 }
