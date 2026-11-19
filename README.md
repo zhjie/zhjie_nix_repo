@@ -10,5 +10,5 @@
 | [lean-lsp-mcp](https://github.com/oOo0oOo/lean-lsp-mcp) | 0.33.0 | 0.33.0 | Up to date | Auto |
 | [qterm](https://github.com/qterm/qterm) | 0.8.2 | 0.8.2 | Up to date | Auto |
 | [gpu-unlock-ada](https://github.com/JustAResearcher/gpu-unlock-ada) | 1.1.1 | 1.1.1 | Up to date | Auto |
-| [roon-server](https://roonlabs.com) | 2.74.1719 | 2.74.1719 | Up to date | Auto |
+| [roon-server](https://roonlabs.com) | 2.75.1725 | 2.75.1725 | Up to date | Auto |
 | [emacs-client](https://github.com/d12frosted/homebrew-emacs-plus) | 1.0 | Manual | Manual | Manual |
