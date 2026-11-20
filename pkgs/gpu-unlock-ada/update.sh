@@ -59,31 +59,18 @@ NVIDIA_SOURCE_URL="$(jq -r '.source_artifacts[] | select((.filename // "") | end
 NVIDIA_SOURCE_FILENAME="$(jq -r '.source_artifacts[] | select((.filename // "") | endswith(".tar.xz")) | .filename' "$ARTIFACTS_FILE")"
 NVIDIA_SOURCE_HEX="$(jq -r '.source_artifacts[] | select((.filename // "") | endswith(".tar.xz")) | .sha256' "$ARTIFACTS_FILE")"
 
-NVIDIA_UTILS_URL="$(jq -r '.source_artifacts[] | select((.filename // "") | endswith(".pkg.tar.zst")) | .url' "$ARTIFACTS_FILE")"
-NVIDIA_UTILS_FILENAME="$(jq -r '.source_artifacts[] | select((.filename // "") | endswith(".pkg.tar.zst")) | .filename' "$ARTIFACTS_FILE")"
-NVIDIA_UTILS_HEX="$(jq -r '.source_artifacts[] | select((.filename // "") | endswith(".pkg.tar.zst")) | .sha256' "$ARTIFACTS_FILE")"
-
 NVIDIA_SOURCE_HASH="$(nix hash convert --to sri --hash-algo sha256 "$NVIDIA_SOURCE_HEX")"
 
-# Check if upstream nvidia-utils URL is alive; if 404, fallback to Arch Linux official archive
-if ! curl -fsSL -I "$NVIDIA_UTILS_URL" >/dev/null 2>&1; then
-  ARCH_URL="https://archive.archlinux.org/packages/n/nvidia-utils/nvidia-utils-${FIRMWARE_VERSION}-1-x86_64.pkg.tar.zst"
-  if curl -fsSL -I "$ARCH_URL" >/dev/null 2>&1; then
-    printf '  Notice: upstream nvidia-utils URL unavailable, using Arch archive: %s\n' "$ARCH_URL"
-    NVIDIA_UTILS_URL="$ARCH_URL"
-    NVIDIA_UTILS_FILENAME="nvidia-utils-${FIRMWARE_VERSION}-1-x86_64.pkg.tar.zst"
-    PREFETCH_UTILS="$(nix store prefetch-file --json "$NVIDIA_UTILS_URL")"
-    NVIDIA_UTILS_HASH="$(printf '%s\n' "$PREFETCH_UTILS" | jq -r '.hash')"
-  else
-    NVIDIA_UTILS_HASH="$(nix hash convert --to sri --hash-algo sha256 "$NVIDIA_UTILS_HEX")"
-  fi
-else
-  NVIDIA_UTILS_HASH="$(nix hash convert --to sri --hash-algo sha256 "$NVIDIA_UTILS_HEX")"
-fi
+NVIDIA_UTILS_FILENAME="nvidia-utils-${FIRMWARE_VERSION}-1-x86_64.pkg.tar.zst"
+NVIDIA_UTILS_URL="https://archive.archlinux.org/packages/n/nvidia-utils/${NVIDIA_UTILS_FILENAME}"
+PREFETCH_UTILS="$(nix store prefetch-file --json "$NVIDIA_UTILS_URL")"
+NVIDIA_UTILS_HASH="$(printf '%s\n' "$PREFETCH_UTILS" | jq -r '.hash')"
 
 if [ "$CURRENT" = "$VERSION" ] && \
    jq -e --arg sourceHash "$SOURCE_HASH" '.sourceHash == $sourceHash' "$HASHES_FILE" >/dev/null 2>&1 && \
    jq -e --arg utilsHash "$NVIDIA_UTILS_HASH" '.nvidiaUtilsHash == $utilsHash' "$HASHES_FILE" >/dev/null 2>&1 && \
+   jq -e --arg utilsUrl "$NVIDIA_UTILS_URL" '.nvidiaUtilsUrl == $utilsUrl' "$HASHES_FILE" >/dev/null 2>&1 && \
+   jq -e --arg utilsFilename "$NVIDIA_UTILS_FILENAME" '.nvidiaUtilsFilename == $utilsFilename' "$HASHES_FILE" >/dev/null 2>&1 && \
    jq -e --arg fwVersion "$FIRMWARE_VERSION" '.firmwareVersion == $fwVersion' "$HASHES_FILE" >/dev/null 2>&1; then
   printf 'Already up to date.\n'
   exit 0

@@ -53,8 +53,8 @@ let
       runHook preBuild
       mkdir inputs
       ln -s ${nvidiaSource} inputs/${hashes.nvidiaSourceFilename}
-      ln -s ${nvidiaUtils} inputs/nvidia-utils-${firmwareVersion}-1-x86_64_v3.pkg.tar.zst
-      make firmware INPUTS="$PWD/inputs" ASSETS="$PWD/assets"
+      ln -s ${nvidiaUtils} inputs/${hashes.nvidiaUtilsFilename}
+      make firmware INPUTS="$PWD/inputs" ASSETS="$PWD/assets" NV_UTILS="${hashes.nvidiaUtilsFilename}"
       runHook postBuild
     '';
 
